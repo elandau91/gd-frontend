@@ -9,10 +9,9 @@ class ShowShow extends React.Component {
 
 
     componentDidMount() {
-        fetch(`http://localhost:3000/shows/${this.props.showObj.uuid}`)
+        fetch(`http://localhost:3000/api/v1/shows/${this.props.showObj.uuid}`)
         .then(res => res.json())
         .then(showFetch => {
-            console.log(showFetch)
             this.setState({
                 featuredShow: showFetch
                 }
@@ -20,7 +19,10 @@ class ShowShow extends React.Component {
         })
     }
 
+
+
     render() {
+        // console.log(this.state.featuredShow)
         return(
             <>
             {
@@ -29,7 +31,7 @@ class ShowShow extends React.Component {
             :   
 
                 <>
-                <h1>Show Page</h1>
+                <h1 class='test' >Show Page</h1>
                 <h3>{this.state.featuredShow.venue}, {this.state.featuredShow.city}, {this.state.featuredShow.state} - {this.state.featuredShow.day}/{this.state.featuredShow.month}/{this.state.featuredShow.year}</h3>
                 <ul>
                     {this.state.featuredShow.song_refs.map(song => {

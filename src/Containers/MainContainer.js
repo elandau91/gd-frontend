@@ -1,6 +1,6 @@
 import React from 'react'
 import ShowShow from '../Components/ShowShow'
-
+import {Route, withRouter} from 'react-router-dom'
 
 class MainContainer extends React.Component {
 
@@ -10,10 +10,10 @@ class MainContainer extends React.Component {
       }
       
       componentDidMount() {
-        fetch('http://localhost:3000/shows')
+        fetch('http://localhost:3000/api/v1/shows')
         .then(res => res.json())
         .then(shows => {
-          let newShows = shows.sort(() => Math.random() - Math.random()).slice(0, 5)
+          let newShows = shows.sort(() => Math.random() - Math.random()).slice(0, 10)
           this.setState({
             topShows: newShows
           })
@@ -21,7 +21,7 @@ class MainContainer extends React.Component {
       }
 
       renderShow = (show) => {
-        console.log(show)
+        
         
         this.setState({
             feature: show
@@ -30,12 +30,13 @@ class MainContainer extends React.Component {
 
 
     render() {
+        // console.log(this.state.feature)
         return(
             <>
             {
                 this.state.feature === null ? 
                 <>
-                <h1>Hi, here are some shows:</h1>
+                <h1 class="test">Hi, here are some shows:</h1>
                     {this.state.topShows.map(show => {
                     return (
                         <>
@@ -49,7 +50,8 @@ class MainContainer extends React.Component {
                 </>
             :
                 <>
-                    <ShowShow showObj={this.state.feature} />
+                    
+                    <ShowShow showObj={this.state.feature}/>
                 </>
             }
 
@@ -59,4 +61,4 @@ class MainContainer extends React.Component {
 
 }
 
-export default MainContainer
+export default withRouter(MainContainer)
