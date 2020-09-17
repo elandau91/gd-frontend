@@ -1,11 +1,11 @@
 import React from 'react'
-import { NavLink, withRouter } from 'react-router-dom'
+import {withRouter } from 'react-router-dom'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
-// import DeadLogo from ''
+import SvgDeadditMultiLockup from '../Icons/DeadditMultiLockup'
 
 
 
@@ -26,8 +26,8 @@ function NavigationBar(props) {
                         <li>Profile</li>
                     </NavLink> */}
 
-                    <Navbar fixed="top" bg="dark" variant="dark">
-                            <Navbar.Brand href="/home">Navbar</Navbar.Brand>
+                    <Navbar fixed="top" bg="light" variant="light">
+                            <Navbar.Brand href="/home"><SvgDeadditMultiLockup width="80px" height="40px" /></Navbar.Brand>
                             <Nav className="mr-auto">
                             <Nav.Link href="/home">Home</Nav.Link>
                             <Nav.Link href={`/user/${props.currentUser.id}`}>Profile</Nav.Link>
@@ -43,8 +43,8 @@ function NavigationBar(props) {
                 </>
             :   
                     <>
-                       <Navbar fixed="top" bg="dark" variant="dark">
-                            <Navbar.Brand href="#home"></Navbar.Brand>
+                       <Navbar fixed="top" bg="light" variant="light">
+                            <Navbar.Brand href="#home"><SvgDeadditMultiLockup width="80px" height="40px" /></Navbar.Brand>
                             <Nav className="mr-auto">
                             </Nav>
         

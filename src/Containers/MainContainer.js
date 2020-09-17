@@ -1,11 +1,17 @@
 import React from 'react'
 import ShowShow from '../Components/ShowShow'
-import {Route, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
+import ListGroup from 'react-bootstrap/ListGroup'
+import MiniShow from '../Components/MiniShow'
+import Pagination from '../Components/Pagination'
 
 class MainContainer extends React.Component {
 
     state = {
-        topShows: [],
+        allShows: [],
+        currentShows: [],
+        currentPage: null,
+        totalPages: null,
         feature: null
       }
       
@@ -13,9 +19,8 @@ class MainContainer extends React.Component {
         fetch('http://localhost:3000/api/v1/shows')
         .then(res => res.json())
         .then(shows => {
-          let newShows = shows.sort(() => Math.random() - Math.random()).slice(0, 10)
           this.setState({
-            topShows: newShows
+            allShows: shows
           })
         })
       }
@@ -28,25 +33,57 @@ class MainContainer extends React.Component {
         })
       }
 
+      onPageChanged = (data) => {
+        const { allShows } = this.state;
+        const { currentPage, totalPages, pageLimit } = data;
+        const offset = (currentPage - 1) * pageLimit;
+        const currentShows = allShows.slice(offset, offset + pageLimit);
+    
+        this.setState({ currentPage, currentShows, totalPages });
+      }
+
 
     render() {
-        // console.log(this.state.feature)
+        const { allShows, currentShows, currentPage, totalPages } = this.state;
+        const totalShows = allShows.length;
+        const headerClass = ['text-dark py-2 pr-4 m-0', currentPage ? 'border-gray border-right' : ''].join(' ').trim();
+
+        if (totalShows === 0) return null;
+
         return(
             <>
             {
                 this.state.feature === null ? 
                 <>
-                <h1 class="test">Hi, here are some shows:</h1>
-                    {this.state.topShows.map(show => {
-                    return (
-                        <>
-                        <h3>{show.venue}, {show.city}, {show.state} - {show.day}/{show.month}/{show.year}</h3>
-                    {/* <p >{show.uuid}</p> */}
-                    <p onClick={() => this.renderShow(show)}>{show.uuid}</p>
-                            <br></br>
-                        </>
-                    )
-                    })}
+                
+                    <div className="headers">
+                        <h2 className={headerClass}>
+                        <strong className="text-secondary">{totalShows}</strong> Shows
+                        </h2>
+                    </div>
+                    <div className="currentpage">
+
+                        { currentPage && (
+                        <span className="current-page d-inline-block h-100 pl-4 text-secondary">
+                        Page <span className="font-weight-bold">{ currentPage }</span> / <span className="font-weight-bold">{ totalPages }</span>
+                        </span>
+                    ) }
+                    </div>
+
+                    <Pagination className="pagination" totalRecords={totalShows} pageLimit={30} pageNeighbours={2} onPageChanged={this.onPageChanged} />
+                    <ListGroup>
+
+                        {currentShows.map((show, index) => {
+                            return (
+                                <ListGroup.Item key={index} onClick={() => this.renderShow(show)}>
+                                
+                                    <MiniShow  showObj={show} />
+                                
+                                </ListGroup.Item>
+                        
+                            )
+                        })}
+                    </ListGroup>
                 </>
             :
                 <>

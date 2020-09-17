@@ -31,7 +31,7 @@ class ShowShow extends React.Component {
             :   
 
                 <>
-                <h1 class='test' >Show Page</h1>
+                <h1 className='test' >Show Page</h1>
                 <h3>{this.state.featuredShow.venue}, {this.state.featuredShow.city}, {this.state.featuredShow.state} - {this.state.featuredShow.day}/{this.state.featuredShow.month}/{this.state.featuredShow.year}</h3>
                 <ul>
                     {this.state.featuredShow.song_refs.map(song => {

@@ -27,7 +27,7 @@ class LoginForm extends React.Component {
     render() {
         return(
             <>
-                <h6 class='test'>Log In:</h6>
+                <h6 className='test'>Log In:</h6>
                 <form onSubmit={this.submitHelper}>
                     <input name="username" type="text" placeholder="Enter Username" value={this.state.username} onChange={this.changeHelper} />
                     <input name="password" type="password" placeholder="Enter Password" value={this.state.password} onChange={this.changeHelper} />
