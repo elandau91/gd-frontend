@@ -1,5 +1,6 @@
 import React from 'react'
-import {withRouter } from 'react-router-dom'
+import {withRouter, NavLink} from 'react-router-dom'
+
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
@@ -27,11 +28,11 @@ function NavigationBar(props) {
                     </NavLink> */}
 
                     <Navbar fixed="top" bg="light" variant="light">
-                            <Navbar.Brand href="/home"><SvgDeadditMultiLockup width="80px" height="40px" /></Navbar.Brand>
+                            <NavLink className='navguys' to="/shows"><SvgDeadditMultiLockup width="100px" height="50px" /></NavLink>
                             <Nav className="mr-auto">
-                            <Nav.Link href="/home">Home</Nav.Link>
-                            <Nav.Link href={`/user/${props.currentUser.id}`}>Profile</Nav.Link>
-                            <Nav.Link onClick={props.clearUser} href="#pricing">Logout</Nav.Link>
+                            <NavLink style={{ textDecoration: 'none' }} className='navguys' to="/shows">Home</NavLink>
+                            <NavLink style={{ textDecoration: 'none' }} className='navguys' to={`/user/${props.currentUser.id}`}>Profile</NavLink>
+                            <NavLink style={{ textDecoration: 'none' }} onClick={props.clearUser} className='navguys' to="#pricing">Logout</NavLink>
                             </Nav>
                             <Form inline>
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -44,7 +45,7 @@ function NavigationBar(props) {
             :   
                     <>
                        <Navbar fixed="top" bg="light" variant="light">
-                            <Navbar.Brand href="#home"><SvgDeadditMultiLockup width="80px" height="40px" /></Navbar.Brand>
+                            <Navbar.Brand href="/"><SvgDeadditMultiLockup width="100px" height="50px" /></Navbar.Brand>
                             <Nav className="mr-auto">
                             </Nav>
         

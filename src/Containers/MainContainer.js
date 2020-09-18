@@ -1,6 +1,5 @@
 import React from 'react'
-import ShowShow from '../Components/ShowShow'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup'
 import MiniShow from '../Components/MiniShow'
 import Pagination from '../Components/Pagination'
@@ -12,7 +11,7 @@ class MainContainer extends React.Component {
         currentShows: [],
         currentPage: null,
         totalPages: null,
-        feature: null
+        // feature: null
       }
       
       componentDidMount() {
@@ -25,13 +24,13 @@ class MainContainer extends React.Component {
         })
       }
 
-      renderShow = (show) => {
+    //   renderShow = (show) => {
         
         
-        this.setState({
-            feature: show
-        })
-      }
+    //     this.setState({
+    //         feature: show
+    //     }, () => this.props.history.push(`/home/${this.state.feature.uuid}`))
+    //   }
 
       onPageChanged = (data) => {
         const { allShows } = this.state;
@@ -52,8 +51,7 @@ class MainContainer extends React.Component {
 
         return(
             <>
-            {
-                this.state.feature === null ? 
+                
                 <>
                 
                     <div className="headers">
@@ -75,22 +73,28 @@ class MainContainer extends React.Component {
 
                         {currentShows.map((show, index) => {
                             return (
-                                <ListGroup.Item key={index} onClick={() => this.renderShow(show)}>
-                                
-                                    <MiniShow  showObj={show} />
-                                
-                                </ListGroup.Item>
+                               <Link key={index}  style={{ textDecoration: 'none' }} to={`/shows/${show.uuid}`}>
+                                    <ListGroup.Item 
+                                    onClick={() => this.props.renderShow(show)}
+                                    >
+                                    
+                                        <MiniShow  showObj={show} />
+                                    
+                                    </ListGroup.Item>
+                               </Link> 
                         
                             )
                         })}
                     </ListGroup>
                 </>
-            :
-                <>
-                    
-                    <ShowShow showObj={this.state.feature}/>
-                </>
-            }
+                {/* {this.state.feature === null ? 
+                    null
+                :
+                    <> 
+                            <Route path={`/home/${this.state.feature.uuid}`} render={() => console.log(this.state.feature)}/>
+                       
+                    </>
+                }  */}
 
             </>
         )

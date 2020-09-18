@@ -1,5 +1,11 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+import Container from 'react-bootstrap/Container'
+import Animation from './Animation/Animation'
 
 
 class SignupForm extends React.Component {
@@ -27,17 +33,54 @@ class SignupForm extends React.Component {
     render() {
         return(
             <>
-                <h6 class='test'>Sign Up:</h6>
-                <form onSubmit={this.submitHelper}>
-                    <input name="username" type="text" placeholder="Enter Username" value={this.state.username} onChange={this.changeHelper} />
-                    <input name="password" type="password" placeholder="Enter Password" value={this.state.password} onChange={this.changeHelper} />
-                    <input name="email" type="text" placeholder="Enter Email" value={this.state.email} onChange={this.changeHelper} />
-                    <input name="avatar" type="text" placeholder="Enter IMG URL" value={this.state.avatar} onChange={this.changeHelper} />
-                    <input type="submit" value="Sign Up"/>
-                </form>
-        
-                <p>Already a user?</p>
-                <button onClick={this.goToLogin}>Login Here</button> 
+            <Animation />
+            <div className='cbox'>
+                <Container className="credentials">
+                    <h3>Sign Up:</h3>
+                    
+                        <Form onSubmit={this.submitHelper}>
+                            <Form.Group controlId="formBasicUsername">
+                                <Form.Label>Create Username</Form.Label>
+                                <Form.Control name='username' type="text" placeholder="Enter username" value={this.state.username} onChange={this.changeHelper} />
+                                <Form.Text className="text-muted">
+                                    Remember to create a unique username!
+                                </Form.Text>
+                            </Form.Group>
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Label>Create Password</Form.Label>
+                                <Form.Control name='password' type="password" placeholder="Enter password" value={this.state.password} onChange={this.changeHelper} />
+                            </Form.Group>
+                            <Form.Group controlId="formBasicAvatar">
+                                <Form.Label>Create Avatar</Form.Label>
+                                <Form.Control name='avatar' type="text" placeholder="Enter IMG URL" value={this.state.avatar} onChange={this.changeHelper} />
+                            </Form.Group>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Enter Email</Form.Label>
+                                <Form.Control name='email' type="text" placeholder="Enter email" value={this.state.email} onChange={this.changeHelper} />
+                            </Form.Group>
+                            <Form.Text className="text-muted">
+                                Already a User?
+                            </Form.Text>
+                            <div className="lesbuttons">
+
+                                <ButtonToolbar >
+                                    <ButtonGroup>
+                                        <Button variant="primary" type="submit">
+                                            Sign Up
+                                        </Button>
+                                    </ButtonGroup>
+                                    <ButtonGroup>
+                                        <Button variant="secondary" onClick={this.goToLogin}>
+                                            Login Here
+                                        </Button>
+                                    </ButtonGroup>
+
+                                </ButtonToolbar>
+                            </div>
+                        </Form>
+                    
+                </Container>
+            </div>
             </>
         )
     }

@@ -12,7 +12,8 @@ code {
 }
 
 .test {
-  margin-top: 70px;
+  margin-top: 100px;
+  text-align: center;
 }
 
 .headers {
@@ -21,13 +22,43 @@ code {
   display:inline-block
 }
 
+.credentials {
+  text-align: center;
+  background-color: white;
+  opacity: .92;
+  color: black;
+  padding: 30px;
+  display: inline-block;
+  border-style: solid;
+  border-color: black, 5px;
+  border-radius: 20px 20px;
+  margin-top: 100px;
+}
+
+.cbox {
+  display: flex;
+  justify-content: center;
+  margin-left: 400px;
+  margin-right: 400px;
+}
+
+.lesbuttons {
+  display: flex;
+  justify-content: center;
+}
+
 .currentpage {
   display:inline-block
 }
 
 .pageboys {
   display:inline-block;
-  margin-left: 60%;
+  margin-left: 55%;
+}
+
+.navguys {
+  display: inline-block;
+  padding: 0 15px;
 }
 
 * {

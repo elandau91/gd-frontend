@@ -4,18 +4,23 @@ import MainContainer from './Containers/MainContainer'
 import LoginForm from './Components/LoginForm'
 import SignupForm from './Components/SignupForm'
 import NavigationBar from './Components/NavigationBar'
+import Profile from './Components/Profile'
 
 import { Route, Switch, withRouter} from 'react-router-dom'
+import ShowShow from './Components/ShowShow';
 
 class App extends React.Component {
   
   state = {
-    currentUser: null
+    currentUser: null,
+    currentShow: null
   }
 
 
   clearUser = () => {
     localStorage.removeItem("token")
+    localStorage.removeItem("rounds")
+    localStorage.removeItem("show")
     this.setState({currentUser: null}, () => this.props.history.push("/"))
   }
 
@@ -38,7 +43,7 @@ class App extends React.Component {
             window.alert("Wrong Username or Password, please try again. :)")
           } else {
           localStorage.setItem("token", data.jwt)
-          this.setState({currentUser: data.user}, ()=> this.props.history.push("/home"))
+          this.setState({currentUser: data.user}, ()=> this.props.history.push("/shows"))
           }
     })
     
@@ -64,13 +69,15 @@ class App extends React.Component {
             window.alert("Username already exists, think outside the box.")
         } else {
         localStorage.setItem("token", data.jwt)
-        this.setState({currentUser: data.user }, ()=> this.props.history.push("/home"))
+        this.setState({currentUser: data.user }, ()=> this.props.history.push("/shows"))
         }
       })
 }
 
   componentDidMount() {
     const token = localStorage.getItem("token")
+    const showString = localStorage.getItem("show")
+    const show = JSON.parse(showString)
     
     if (token) {
       fetch('http://localhost:3000/api/v1/profile', {
@@ -79,7 +86,9 @@ class App extends React.Component {
       }).then(res => res.json())
         .then(user => {
           this.setState(
-            {currentUser: user.user}
+            {currentUser: user.user,
+             currentShow: show
+            }
             )
         }
       )
@@ -88,6 +97,14 @@ class App extends React.Component {
       this.props.history.push("/")
     }
 
+  }
+
+  renderShow = (showObj) => {
+    localStorage.setItem("show", JSON.stringify(showObj))
+    
+    this.setState({
+      currentShow: showObj
+    }, () => console.log(localStorage))
   }
 
   
@@ -99,7 +116,9 @@ class App extends React.Component {
         <Switch>
           {this.state.currentUser ? 
             <>
-              <Route exact path="/home" render={() => <MainContainer />}/>
+              <Route exact path="/shows" render={() => <MainContainer renderShow={this.renderShow} />}/>
+              <Route exact path="/shows/:uuid" render={() => <ShowShow showObj={this.state.currentShow}/>}/>
+              <Route exact path={`/user/${this.state.currentUser.id}`} render={() => <Profile userObj={this.state.currentUser} renderShow={this.renderShow}/>}/>
             </>
           :
             <>
