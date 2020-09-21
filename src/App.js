@@ -100,14 +100,13 @@ class App extends React.Component {
 
   renderShow = (showObj) => {
     localStorage.setItem("show", JSON.stringify(showObj))
-    
+    console.log(showObj)
     this.setState({
       currentShow: showObj
-    }, () => console.log(localStorage))
+    })
   }
 
   confirmDelete = () => {
-    console.log(this.state.currentUser)
 
     const options = {
       method: "DELETE"
@@ -128,7 +127,6 @@ class App extends React.Component {
   }
 
   confirmUpdates = ({username, email, avatar}) => {
-    // console.log("username", username, "email", email, "avatar", avatar)
 
     const options = {
       method: "PATCH",
@@ -145,22 +143,75 @@ class App extends React.Component {
 
     fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}`, options)
     .then(res => res.json())
-    .then(updatedUser => this.setState({...this.state, currentUser: updatedUser}) )
+    .then(updatedUser => {
+      if(updatedUser.error === 'failed to update user') {
+        window.alert("Username already exists, think outside the box.")
+      } else {
+        this.setState({...this.state, currentUser: updatedUser}) 
+      }
+    })
 
   }
 
+  postFavorite = (showUuid) => {
+    const options = {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: this.state.currentUser.id,
+        show_id: showUuid
+      })
+    }
+
+    fetch('http://localhost:3000/api/v1/fave_shows', options)
+    .then(res => res.json())
+    .then(
+      newFave => {
+      let newProps = this.state.currentUser
+      newProps.shows = [...this.state.currentUser.shows, newFave.show]
+      newProps.fave_shows = [...this.state.currentUser.fave_shows, newFave]
+      this.setState({
+        currentUser: newProps
+      })
+    }
+    )
+  }
+
+  deleteFavorite = (fave) => {
+    let faveId = fave.id 
+    let newProps = this.state.currentUser
+    newProps.shows = this.state.currentUser.shows.filter(show => show.uuid !== fave.show_id)
+    newProps.fave_shows = this.state.currentUser.fave_shows.filter(fave => fave.id !== faveId)
+
+    const options = {
+      method: "DELETE"
+    }
+
+    fetch(`http://localhost:3000/api/v1/fave_shows/${faveId}`, options)
+    .then(res => {
+      this.setState({
+        currentUser: newProps
+      })
+    })
+  }
+
+  
   
   render() {
-
+    
     return (
       <>
         <NavigationBar clearUser={this.clearUser} currentUser={this.state.currentUser} />
         <Switch>
           {this.state.currentUser ? 
+          
             <>
-              <Route exact path="/shows" render={() => <MainContainer renderShow={this.renderShow} />}/>
-              <Route exact path="/shows/:uuid" render={() => <ShowShow showObj={this.state.currentShow}/>}/>
-              <Route exact path={`/user/${this.state.currentUser.id}`} render={() => <Profile userObj={this.state.currentUser} confirmUpdates={this.confirmUpdates} confirmDelete={this.confirmDelete} renderShow={this.renderShow}/>}/>
+              <Route exact path="/shows" render={() => <MainContainer deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} renderShow={this.renderShow} currentUser={this.state.currentUser}/>}/>
+              <Route exact path="/shows/:uuid" render={() => <ShowShow currentUser={this.state.currentUser} showObj={this.state.currentShow}/>}/>
+              <Route exact path={`/user/${this.state.currentUser.id}`} render={() => <Profile deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} userObj={this.state.currentUser} confirmUpdates={this.confirmUpdates} confirmDelete={this.confirmDelete} renderShow={this.renderShow}/>}/>
             </>
           :
             <>

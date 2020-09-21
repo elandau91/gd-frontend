@@ -22,6 +22,15 @@ code {
   display:inline-block
 }
 
+.loading {
+  margin-top: 100px;
+  margin-left: 40%;
+}
+
+.spinner {
+  color: white;
+}
+
 .credentials {
   text-align: center;
   background-color: white;
@@ -50,6 +59,26 @@ code {
 .profimg {
   max-width: 200px;
   max-height: 200px;
+  border-radius: 20px 20px;
+  filter: drop-shadow(5px 5px 5px black)
+}
+
+.title {
+  display: inline-block;
+}
+
+.likes{
+  height: 40px;
+  width: 40px;
+  float: right
+}
+
+.addcomment{
+  margin-left: 70%;
+}
+
+.searchboi{
+  display: inline-block;
 }
 
 .currentpage {
@@ -66,6 +95,11 @@ code {
   padding: 0 15px;
 }
 
+.faveshows {
+  display: inline-block;
+}
+
 * {
   font-family: 'Barlow Condensed', sans-serif;
+  color: black
 }

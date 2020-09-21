@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 import MiniShow from './MiniShow'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
+// import SvgDeadditMultiLogomark1 from '../Icons/DeadditMultiLogomark'
 
 class Profile extends React.Component {
 
@@ -46,6 +47,7 @@ class Profile extends React.Component {
         return(
             <>
             <h1 className='headers'>Profile</h1>
+            {/* <SvgDeadditMultiLogomark1 /> */}
             <CardGroup>
                 <Card>
                     <Card.Img className='profimg' variant="top" src={this.props.userObj.avatar} />
@@ -138,13 +140,13 @@ class Profile extends React.Component {
                         {this.props.userObj.shows.map((show, index) => {
                             
                             return(
-                                <Link key={index} style={{ textDecoration: 'none' }} to={`/shows/${show.uuid}`}>
-                                    <ListGroup.Item onClick={() => this.props.renderShow(show)} >
+        
+                                    <ListGroup.Item action variant="light" key={index}  >
                                     
-                                        <MiniShow  showObj={show} />
+                                        <MiniShow  showObj={show} deleteFavorite={this.props.deleteFavorite} postFavorite={this.props.postFavorite} renderShow={this.props.renderShow} currentUser={this.props.userObj}/>
                             
                                     </ListGroup.Item>
-                                </Link>
+                              
                             )
                         })}
 
