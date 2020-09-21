@@ -38,13 +38,18 @@ code {
 .cbox {
   display: flex;
   justify-content: center;
-  margin-left: 400px;
-  margin-right: 400px;
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
 .lesbuttons {
   display: flex;
   justify-content: center;
+}
+
+.profimg {
+  max-width: 200px;
+  max-height: 200px;
 }
 
 .currentpage {

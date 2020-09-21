@@ -19,7 +19,6 @@ class App extends React.Component {
 
   clearUser = () => {
     localStorage.removeItem("token")
-    localStorage.removeItem("rounds")
     localStorage.removeItem("show")
     this.setState({currentUser: null}, () => this.props.history.push("/"))
   }
@@ -107,6 +106,49 @@ class App extends React.Component {
     }, () => console.log(localStorage))
   }
 
+  confirmDelete = () => {
+    console.log(this.state.currentUser)
+
+    const options = {
+      method: "DELETE"
+    }
+
+    fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}`, options)
+    .then(res => {
+      localStorage.removeItem("token")
+      localStorage.removeItem("show")
+      this.setState({
+        currentUser: null,
+        currentShow: null
+      }, () => {
+        this.props.history.push("/")
+        window.alert("Account Deleted, Bye!")})
+    })
+
+  }
+
+  confirmUpdates = ({username, email, avatar}) => {
+    // console.log("username", username, "email", email, "avatar", avatar)
+
+    const options = {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        avatar: avatar
+      })
+    }
+
+    fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}`, options)
+    .then(res => res.json())
+    .then(updatedUser => this.setState({...this.state, currentUser: updatedUser}) )
+
+  }
+
   
   render() {
 
@@ -118,7 +160,7 @@ class App extends React.Component {
             <>
               <Route exact path="/shows" render={() => <MainContainer renderShow={this.renderShow} />}/>
               <Route exact path="/shows/:uuid" render={() => <ShowShow showObj={this.state.currentShow}/>}/>
-              <Route exact path={`/user/${this.state.currentUser.id}`} render={() => <Profile userObj={this.state.currentUser} renderShow={this.renderShow}/>}/>
+              <Route exact path={`/user/${this.state.currentUser.id}`} render={() => <Profile userObj={this.state.currentUser} confirmUpdates={this.confirmUpdates} confirmDelete={this.confirmDelete} renderShow={this.renderShow}/>}/>
             </>
           :
             <>

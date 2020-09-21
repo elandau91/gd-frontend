@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Sky from 'react-sky';
 
+
 // you can pass imported images to Sky
 // import myImage from "./media/myImage.png"
 
