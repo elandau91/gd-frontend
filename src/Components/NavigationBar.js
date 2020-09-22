@@ -31,7 +31,8 @@ function NavigationBar(props) {
                             <NavLink className='navguys' to="/shows"><SvgDeadditMultiLockup width="100px" height="50px" /></NavLink>
                             <Nav className="mr-auto">
                             <NavLink style={{ textDecoration: 'none' }} className='navguys' to="/shows">Home</NavLink>
-                            <NavLink style={{ textDecoration: 'none' }} className='navguys' to={`/user/${props.currentUser.id}`}>Profile</NavLink>
+                            <NavLink style={{ textDecoration: 'none' }} className='navguys' to={`/profile/${props.currentUser.id}`}>Profile</NavLink>
+                            <NavLink style={{ textDecoration: 'none' }} className='navguys' to="/users">All Users</NavLink>
                             <NavLink style={{ textDecoration: 'none' }} onClick={props.clearUser} className='navguys' to="#pricing">Logout</NavLink>
                             </Nav>
                             <Form inline>

@@ -9,12 +9,16 @@ class MiniShow extends React.Component {
         let faveShow = this.props.currentUser.fave_shows.find(fave_show => {
             return fave_show.show_id === this.props.showObj.uuid
         })
+
+        
         
         return(
             <>
             <Link style={{ textDecoration: 'none' }} to={`/shows/${this.props.showObj.uuid}`} onClick={() => this.props.renderShow(this.props.showObj)}>
                 <h5 className="title">{this.props.showObj.venue}, {this.props.showObj.city}, {this.props.showObj.state} - {this.props.showObj.month}/{this.props.showObj.day}/{this.props.showObj.year}</h5>
             </ Link>
+           
+
 
             {faveShow ? 
             <SvgDeadditMultiLogomark onClick={() => this.props.deleteFavorite(faveShow)} className="likes"/>

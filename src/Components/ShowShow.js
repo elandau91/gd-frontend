@@ -66,6 +66,20 @@ class ShowShow extends React.Component {
           })
     }
 
+    removeComment = (comment) => {
+        const options = {
+            method: "DELETE"
+        }
+
+        fetch(`http://localhost:3000/api/v1/comment_shows/${comment.id}`, options)
+        .then(res => {
+            let lessShow = this.state.featuredShow
+            lessShow.comment_shows = this.state.featuredShow.comment_shows.filter(cs => cs.id !== comment.id)
+
+            this.setState({featuredShow: lessShow})
+        })
+    }
+
 
     render() {
         // console.log(this.state.featuredShow)
@@ -121,19 +135,24 @@ class ShowShow extends React.Component {
                                 </>
                             }
                                 
-                                <ListGroup >
+                            <ListGroup >
 
-                                    {this.state.featuredShow.comment_shows.map((comment, index) => {
+                                {this.state.featuredShow.comment_shows.map((comment, index) => {
                                         
-                                        let user = this.state.featuredShow.users.find(user => { return user.id === comment.user_id})
-                                        return(
-                                            <ListGroup.Item action variant="no style" key={index}>
-                                                {comment.content}
-                                                <p><small className="text-muted">-{user.username}</small></p>
-                                            </ListGroup.Item>
-                                        )
-                                    })}
-                                </ListGroup>
+                                    let user = this.state.featuredShow.users.find(user => { return user.id === comment.user_id})
+                                    return(
+                                        <ListGroup.Item action variant="no style" key={index}>
+                                            {comment.content}
+                                            <p><small className="text-muted">-{user.username}</small></p>
+                                            {this.props.currentUser.id === user.id ? 
+                                            <Button onClick={() => this.removeComment(comment)} className="faveshows" size="sm" variant="outline-dark" >Remove Comment</Button>
+                                            :
+                                            null
+                                            }
+                                        </ListGroup.Item>
+                                    )
+                                })}
+                            </ListGroup>
                         </Card.Body>
                         <Card.Footer>
                         <small className="text-muted">Currently there are {this.state.featuredShow.comment_shows.length} comments</small>

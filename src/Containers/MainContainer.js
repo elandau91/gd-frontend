@@ -46,7 +46,7 @@ class MainContainer extends React.Component {
 
         // if (totalShows === 0) return null;
         
-        // console.log(this.state.currentShows)
+        
         return(
             <>
                 {totalShows === 0 ? 
@@ -74,21 +74,26 @@ class MainContainer extends React.Component {
                     
                     {/* <SearchFilter className='searchboi' /> */}
                     <Pagination className="pagination" totalRecords={totalShows} pageLimit={30} pageNeighbours={2} onPageChanged={this.onPageChanged} />
-                    <ListGroup>
 
                         {currentShows.map((show, index) => {
                             return (
+                                <ListGroup horizontal key={index}>
                                 
-                                <ListGroup.Item action variant="light" key={index} >
-                                    
-                                        <MiniShow  showObj={show} deleteFavorite={this.props.deleteFavorite} postFavorite={this.props.postFavorite} renderShow={this.props.renderShow} currentUser={this.props.currentUser}/>
-                                    
+                                    <ListGroup.Item action variant="light" >
+                                        
+                                        <MiniShow showObj={show} deleteFavorite={this.props.deleteFavorite} postFavorite={this.props.postFavorite} renderShow={this.props.renderShow} currentUser={this.props.currentUser}/>
+                                        
                                     </ListGroup.Item>
+                                    {this.props.currentUser.fave_shows.find(fave => {return fave.show_id === show.uuid}) ?
+
+                                    <ListGroup.Item>Click Stealie to Unlike</ListGroup.Item>
+                                    :
+                                    <ListGroup.Item>Click Stealie to Like!!</ListGroup.Item>
+                                    }
                                
-                               
+                                </ListGroup>
                                )
                             })}
-                    </ListGroup>
                 </>
             }
             </>

@@ -99,6 +99,16 @@ code {
   display: inline-block;
 }
 
+.list {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.list:hover {
+  background-color: lightcyan;
+}
+
+
+
 * {
   font-family: 'Barlow Condensed', sans-serif;
   color: black

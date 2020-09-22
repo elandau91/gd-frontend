@@ -1,7 +1,8 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import MiniUser from './MiniUser'
+// import {Link} from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
-import CardGroup from 'react-bootstrap/CardGroup'
+import CardColumns from 'react-bootstrap/CardColumns'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 import MiniShow from './MiniShow'
@@ -48,7 +49,7 @@ class Profile extends React.Component {
             <>
             <h1 className='headers'>Profile</h1>
             {/* <SvgDeadditMultiLogomark1 /> */}
-            <CardGroup>
+            <CardColumns>
                 <Card>
                     <Card.Img className='profimg' variant="top" src={this.props.userObj.avatar} />
                     <Card.Body>
@@ -136,14 +137,71 @@ class Profile extends React.Component {
                 <Card>
                     <Card.Body>
                     <Card.Title>Favorite Shows</Card.Title>
-                    <ListGroup>
                         {this.props.userObj.shows.map((show, index) => {
+                            
+                            return(
+                                <ListGroup horizontal key={index}>
+        
+                                    <ListGroup.Item action variant="light"  >
+                                    
+                                        <MiniShow  showObj={show} deleteFavorite={this.props.deleteFavorite} postFavorite={this.props.postFavorite} renderShow={this.props.renderShow} currentUser={this.props.userObj}/>
+                            
+                                    </ListGroup.Item>
+                                    {/* <ListGroup.Item>Unlike</ListGroup.Item> */}
+                                </ListGroup>
+                            )
+                        })}
+
+                    
+                    </Card.Body>
+                    <Card.Footer>
+                    <small className="text-muted">Currently you have {this.props.userObj.shows.length} favorite show(s)</small>
+                    </Card.Footer>
+                </Card>
+
+                <Card>
+                    <Card.Body>
+
+                    <Card.Title>Following</Card.Title>
+                    <ListGroup>
+                        {this.props.userObj.followees.map((followee, index) => {
+                            
+                            return(
+        
+                            <ListGroup key={index} horizontal>
+                                
+                                <ListGroup.Item action variant="light"  >
+                                    
+                                    <MiniUser userObj={followee} unfollowUser={this.props.unfollowUser} followUser={this.props.followUser} renderUser={this.props.renderUser} currentUser={this.props.userObj}/>
+                                    
+                                    
+                                </ListGroup.Item>
+                                
+                                <ListGroup.Item>Click Stealie to Unfollow</ListGroup.Item>
+        
+                           
+                            </ListGroup>
+                              
+                            )
+                        })}
+
+                    </ListGroup>
+                    
+                    <Card.Footer>
+                    <small className="text-muted">Currently you are following {this.props.userObj.followees.length} user(s)</small>
+                    </Card.Footer>
+                    </Card.Body>
+                        
+                    <Card.Body>
+                    <Card.Title>Followers</Card.Title>
+                    <ListGroup>
+                        {this.props.userObj.followers.map((follower, index) => {
                             
                             return(
         
                                     <ListGroup.Item action variant="light" key={index}  >
                                     
-                                        <MiniShow  showObj={show} deleteFavorite={this.props.deleteFavorite} postFavorite={this.props.postFavorite} renderShow={this.props.renderShow} currentUser={this.props.userObj}/>
+                                        <p>{follower.username}</p>
                             
                                     </ListGroup.Item>
                               
@@ -152,12 +210,12 @@ class Profile extends React.Component {
 
                     </ListGroup>
                     
-                    </Card.Body>
                     <Card.Footer>
-                    <small className="text-muted">Currently you have {this.props.userObj.shows.length} favorite show(s)</small>
+                    <small className="text-muted">Currently you have {this.props.userObj.followers.length} follower(s)</small>
                     </Card.Footer>
+                    </Card.Body>
                 </Card>
-            </CardGroup>
+            </CardColumns>
 
             </>
         )

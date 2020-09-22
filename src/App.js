@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
 import MainContainer from './Containers/MainContainer'
+import UserContainer from './Containers/UserContainer'
 import LoginForm from './Components/LoginForm'
 import SignupForm from './Components/SignupForm'
 import NavigationBar from './Components/NavigationBar'
 import Profile from './Components/Profile'
-
+import Friend from './Components/Friend'
 import { Route, Switch, withRouter} from 'react-router-dom'
 import ShowShow from './Components/ShowShow';
 
@@ -13,13 +14,15 @@ class App extends React.Component {
   
   state = {
     currentUser: null,
-    currentShow: null
+    currentShow: null,
+    currentFriend: null
   }
 
 
   clearUser = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("show")
+    localStorage.removeItem("user")
     this.setState({currentUser: null}, () => this.props.history.push("/"))
   }
 
@@ -76,7 +79,10 @@ class App extends React.Component {
   componentDidMount() {
     const token = localStorage.getItem("token")
     const showString = localStorage.getItem("show")
+    const friendString = localStorage.getItem("friend")
     const show = JSON.parse(showString)
+    const friend = JSON.parse(friendString)
+    console.log(friend)
     
     if (token) {
       fetch('http://localhost:3000/api/v1/profile', {
@@ -86,7 +92,8 @@ class App extends React.Component {
         .then(user => {
           this.setState(
             {currentUser: user.user,
-             currentShow: show
+             currentShow: show,
+             currentFriend: friend
             }
             )
         }
@@ -100,7 +107,6 @@ class App extends React.Component {
 
   renderShow = (showObj) => {
     localStorage.setItem("show", JSON.stringify(showObj))
-    console.log(showObj)
     this.setState({
       currentShow: showObj
     })
@@ -198,6 +204,59 @@ class App extends React.Component {
     })
   }
 
+  unfollowUser = (info) => {
+    // console.log(this.state.currentUser)
+    let newProps = this.state.currentUser
+    newProps.followees = this.state.currentUser.followees.filter(followee => followee.id !== info.id)
+    let del = this.state.currentUser.followed_users.filter(fu => fu.followee_id === info.id)
+    newProps.followed_users = this.state.currentUser.followed_users.filter(fu => fu.followee_id !== info.id) 
+
+    const options = {
+      method: "DELETE"
+    }
+
+    fetch(`http://localhost:3000/api/v1/follows/${del[0].id}`, options)
+    .then(res => {
+      this.setState({currentUser: newProps})
+    })
+  }
+
+  followUser = (info) => {
+    const options = {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        follower_id: this.state.currentUser.id,
+        followee_id: info
+      })
+    }
+
+    fetch(`http://localhost:3000/api/v1/follows`, options)
+    .then(res => res.json())
+    .then(followed => {
+      let newProps = this.state.currentUser
+      newProps.followees = [...this.state.currentUser.followees, followed.followee]
+      newProps.followed_users = [...this.state.currentUser.followed_users, followed]
+      this.setState({
+        currentUser: newProps
+      })
+
+    })
+  }
+
+  renderUser = (userObj) => {
+    fetch(`http://localhost:3000/api/v1/users/${userObj.id}`)
+        .then(res => res.json())
+        .then(user => {
+          localStorage.setItem("friend", JSON.stringify(userObj))
+          this.setState({
+            currentFriend: user
+          }, () => this.props.history.push(`/users/${user.id}`) )
+        })
+  }
   
   
   render() {
@@ -206,12 +265,15 @@ class App extends React.Component {
       <>
         <NavigationBar clearUser={this.clearUser} currentUser={this.state.currentUser} />
         <Switch>
-          {this.state.currentUser ? 
-          
+          {
+            this.state.currentUser ? 
+            
             <>
               <Route exact path="/shows" render={() => <MainContainer deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} renderShow={this.renderShow} currentUser={this.state.currentUser}/>}/>
               <Route exact path="/shows/:uuid" render={() => <ShowShow currentUser={this.state.currentUser} showObj={this.state.currentShow}/>}/>
-              <Route exact path={`/user/${this.state.currentUser.id}`} render={() => <Profile deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} userObj={this.state.currentUser} confirmUpdates={this.confirmUpdates} confirmDelete={this.confirmDelete} renderShow={this.renderShow}/>}/>
+              <Route exact path={`/profile/${this.state.currentUser.id}`} render={() => <Profile renderUser={this.renderUser} currentFriend={this.state.currentFriend} unfollowUser={this.unfollowUser} followUser={this.followUser} deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} userObj={this.state.currentUser} confirmUpdates={this.confirmUpdates} confirmDelete={this.confirmDelete} renderShow={this.renderShow}/>}/>
+              <Route exact path="/users" render={() => <UserContainer renderUser={this.renderUser} unfollowUser={this.unfollowUser} followUser={this.followUser} currentUser={this.state.currentUser} />} />
+              <Route exact path={`/users/:id`} render={() => <Friend currentFriend={this.state.currentFriend} renderUser={this.renderUser} unfollowUser={this.unfollowUser} followUser={this.followUser} deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} renderShow={this.renderShow} currentUser={this.state.currentUser}/>} />
             </>
           :
             <>
