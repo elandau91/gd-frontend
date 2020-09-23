@@ -46,7 +46,7 @@ class Profile extends React.Component {
     render() {
        
         return(
-            <>
+            <div className='backbaby'>
             <h1 className='headers'>Profile</h1>
             {/* <SvgDeadditMultiLogomark1 /> */}
             <CardColumns>
@@ -217,7 +217,7 @@ class Profile extends React.Component {
                 </Card>
             </CardColumns>
 
-            </>
+            </ div>
         )
 
     }

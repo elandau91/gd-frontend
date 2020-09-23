@@ -17,7 +17,7 @@ class MiniUser extends React.Component {
             <Link style={{ textDecoration: 'none' }}
              to={`/users/${this.props.userObj.id}`} 
              onClick={() => this.props.renderUser(this.props.userObj)}>
-                <h5 className="title">{this.props.userObj.username}</h5>
+                <h5 className="title" >{this.props.userObj.username}</h5>
             </ Link>
            
 

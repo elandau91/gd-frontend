@@ -13,31 +13,22 @@ import SvgDeadditMultiLockup from '../Icons/DeadditMultiLockup'
 function NavigationBar(props) {
     return (
         
-        <ul>
+        <>
             {props.currentUser ? 
             
                 <>
-                    {/* <li>Logo</li>   
 
-                    <a onClick={props.clearUser} > 
-                        <li>Log Out</li>
-                    </a> */}
-                
-                    {/* <NavLink to={`/user/${props.currentUser.id}`}>
-                        <li>Profile</li>
-                    </NavLink> */}
-
-                    <Navbar fixed="top" bg="light" variant="light">
+                    <Navbar fixed="top" bg="light" variant="light" className='lenav'>
                             <NavLink className='navguys' to="/shows"><SvgDeadditMultiLockup width="100px" height="50px" /></NavLink>
                             <Nav className="mr-auto">
-                            <NavLink style={{ textDecoration: 'none' }} className='navguys' to="/shows">Home</NavLink>
-                            <NavLink style={{ textDecoration: 'none' }} className='navguys' to={`/profile/${props.currentUser.id}`}>Profile</NavLink>
-                            <NavLink style={{ textDecoration: 'none' }} className='navguys' to="/users">All Users</NavLink>
-                            <NavLink style={{ textDecoration: 'none' }} onClick={props.clearUser} className='navguys' to="#pricing">Logout</NavLink>
+                            <NavLink style={{ textDecoration: 'none', color: "black" }} className='navguys' to="/shows">Home</NavLink>
+                            <NavLink style={{ textDecoration: 'none', color: "black"  }} className='navguys' to={`/users/${props.currentUser.id}`}>Profile</NavLink>
+                            <NavLink style={{ textDecoration: 'none', color: "black"  }} className='navguys' to="/users">All Users</NavLink>
+                            <NavLink style={{ textDecoration: 'none', color: "black"  }} onClick={props.clearUser} className='navguys' to="#pricing">Logout</NavLink>
                             </Nav>
                             <Form inline>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Button variant="outline-info">Search</Button>
+                            <FormControl type="text" placeholder="Search Users" className="mr-sm-2" />
+                            <Button variant="outline-info">Search Users</Button>
                             </Form>
                         </Navbar>
 
@@ -56,7 +47,7 @@ function NavigationBar(props) {
                     </>
             }
 
-        </ul>
+        </>
     )
 
 }

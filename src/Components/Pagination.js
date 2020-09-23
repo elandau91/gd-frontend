@@ -102,7 +102,7 @@ class Pagination extends React.Component {
     const pages = this.fetchPageNumbers();
 
     return (
-      <>
+      <div className="searchbois">
         <nav className="pageboys" aria-label="Countries Pagination">
           <ul className="pagination">
             { pages.map((page, index) => {
@@ -135,7 +135,7 @@ class Pagination extends React.Component {
 
           </ul>
         </nav>
-      </>
+      </div>
     );
   }
 

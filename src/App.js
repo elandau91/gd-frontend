@@ -22,7 +22,7 @@ class App extends React.Component {
   clearUser = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("show")
-    localStorage.removeItem("user")
+    localStorage.removeItem("friend")
     this.setState({currentUser: null}, () => this.props.history.push("/"))
   }
 
@@ -45,7 +45,10 @@ class App extends React.Component {
             window.alert("Wrong Username or Password, please try again. :)")
           } else {
           localStorage.setItem("token", data.jwt)
-          this.setState({currentUser: data.user}, ()=> this.props.history.push("/shows"))
+          this.setState({
+            currentUser: data.user,
+            currentFriend: data.user
+          }, ()=> this.props.history.push("/shows"))
           }
     })
     
@@ -82,7 +85,7 @@ class App extends React.Component {
     const friendString = localStorage.getItem("friend")
     const show = JSON.parse(showString)
     const friend = JSON.parse(friendString)
-    console.log(friend)
+    
     
     if (token) {
       fetch('http://localhost:3000/api/v1/profile', {
@@ -251,10 +254,14 @@ class App extends React.Component {
     fetch(`http://localhost:3000/api/v1/users/${userObj.id}`)
         .then(res => res.json())
         .then(user => {
-          localStorage.setItem("friend", JSON.stringify(userObj))
+          console.log(user)
+          localStorage.setItem("friend", JSON.stringify(user))
+          console.log(localStorage)
           this.setState({
             currentFriend: user
-          }, () => this.props.history.push(`/users/${user.id}`) )
+          }
+          // , () => this.props.history.push(`/users/${user.id}`) 
+          )
         })
   }
   
@@ -264,16 +271,17 @@ class App extends React.Component {
     return (
       <>
         <NavigationBar clearUser={this.clearUser} currentUser={this.state.currentUser} />
-        <Switch>
           {
             this.state.currentUser ? 
             
             <>
+            <Switch>
               <Route exact path="/shows" render={() => <MainContainer deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} renderShow={this.renderShow} currentUser={this.state.currentUser}/>}/>
               <Route exact path="/shows/:uuid" render={() => <ShowShow currentUser={this.state.currentUser} showObj={this.state.currentShow}/>}/>
-              <Route exact path={`/profile/${this.state.currentUser.id}`} render={() => <Profile renderUser={this.renderUser} currentFriend={this.state.currentFriend} unfollowUser={this.unfollowUser} followUser={this.followUser} deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} userObj={this.state.currentUser} confirmUpdates={this.confirmUpdates} confirmDelete={this.confirmDelete} renderShow={this.renderShow}/>}/>
+              <Route exact path={`/users/${this.state.currentUser.id}`} render={() => <Profile renderUser={this.renderUser} currentFriend={this.state.currentFriend} unfollowUser={this.unfollowUser} followUser={this.followUser} deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} userObj={this.state.currentUser} confirmUpdates={this.confirmUpdates} confirmDelete={this.confirmDelete} renderShow={this.renderShow}/>}/>
+              <Route path={`/users/:id`} render={() => <Friend currentFriend={this.state.currentFriend} renderUser={this.renderUser} unfollowUser={this.unfollowUser} followUser={this.followUser} deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} renderShow={this.renderShow} currentUser={this.state.currentUser}/>} />
               <Route exact path="/users" render={() => <UserContainer renderUser={this.renderUser} unfollowUser={this.unfollowUser} followUser={this.followUser} currentUser={this.state.currentUser} />} />
-              <Route exact path={`/users/:id`} render={() => <Friend currentFriend={this.state.currentFriend} renderUser={this.renderUser} unfollowUser={this.unfollowUser} followUser={this.followUser} deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} renderShow={this.renderShow} currentUser={this.state.currentUser}/>} />
+            </Switch>
             </>
           :
             <>
@@ -281,7 +289,6 @@ class App extends React.Component {
               <Route path="/createuser"  render={() => <SignupForm createHandler={this.createHandler}/> }/>  
             </>
           }
-        </Switch>
       </>
     );
   }

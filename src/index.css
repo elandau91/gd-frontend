@@ -19,6 +19,7 @@ code {
 .headers {
   margin-top: 70px;
   margin-left: 10px;
+  font-weight: bold;
   display:inline-block
 }
 
@@ -63,6 +64,15 @@ code {
   filter: drop-shadow(5px 5px 5px black)
 }
 
+.card{
+  filter: drop-shadow(5px 5px 5px black);
+}
+
+.card-columns{
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
 .title {
   display: inline-block;
 }
@@ -77,8 +87,31 @@ code {
   margin-left: 70%;
 }
 
-.searchboi{
+.bigboard {
+  padding-top: 60px;
+  padding-left: 10px;
+  display: flex;
+  background-color: indianred;
+  border-bottom: 2.5px solid black;
+}
+
+.backbaby{
+  background-color: indianred;
+  padding-top: 10px;
+}
+
+.searchbois{
+  /* display: inline-block; */
+  flex: 1;
+  padding-top: 20px;
+}
+
+.lilfilters{
   display: inline-block;
+}
+
+.lenav{
+  border-bottom: 2.5px solid black;
 }
 
 .currentpage {
@@ -87,7 +120,7 @@ code {
 
 .pageboys {
   display:inline-block;
-  margin-left: 55%;
+  margin-left: 30%;
 }
 
 .navguys {

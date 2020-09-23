@@ -82,7 +82,7 @@ class ShowShow extends React.Component {
 
 
     render() {
-        // console.log(this.state.featuredShow)
+        console.log(this.state.featuredShow)
         return(
             <>
             {

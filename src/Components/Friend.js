@@ -2,7 +2,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card'
 import CardColumns from 'react-bootstrap/CardColumns'
 import ListGroup from 'react-bootstrap/ListGroup'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import MiniUser from './MiniUser'
 import MiniShow from './MiniShow'
 
@@ -21,14 +21,16 @@ class Friend extends React.Component {
     //     this.setState({friend: this.props.currentFriend})
     // }
 
+    
+
 
     render(){
-       console.log(this.props.currentFriend)
+       
         return(
             <>
             {this.props.currentFriend ? 
             
-                <>
+                <div className='backbaby'>
                 <h1 className='headers'>{this.props.currentFriend.username}</h1>
                 {/* <SvgDeadditMultiLogomark1 /> */}
                 <CardColumns>
@@ -138,7 +140,7 @@ class Friend extends React.Component {
                     </Card>
                 </CardColumns>
     
-                </>
+                </div>
             :
             null
             }

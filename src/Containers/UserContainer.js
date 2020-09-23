@@ -27,10 +27,10 @@ class UserContainer extends React.Component{
                     </Spinner>
                 </div>
             :
-                <>
+                <div className='backbaby'>
                 <div className="headers">
                         <h2>
-                        <strong className="text-secondary"></strong> All Users
+                        <strong >All Users</strong> 
                         </h2>
                 </div>
 
@@ -56,7 +56,7 @@ class UserContainer extends React.Component{
                                 </ListGroup>
                                )
                             })}
-                </>
+                </div>
             }
             </>
         )
