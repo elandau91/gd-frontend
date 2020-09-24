@@ -15,7 +15,8 @@ class App extends React.Component {
   state = {
     currentUser: null,
     currentShow: null,
-    currentFriend: null
+    currentFriend: null,
+    userSearch: null
   }
 
 
@@ -264,13 +265,17 @@ class App extends React.Component {
           )
         })
   }
+
+  searchForUser = (searchTerm) => {
+    this.setState({...this.state, userSearch: searchTerm}, () => this.props.history.push("/users"))
+  }
   
   
   render() {
-    
+    //console.log(process.env.REACT_APP_GENIUS_KEY)
     return (
       <>
-        <NavigationBar clearUser={this.clearUser} currentUser={this.state.currentUser} />
+        <NavigationBar searchForUser={this.searchForUser} clearUser={this.clearUser} currentUser={this.state.currentUser} />
           {
             this.state.currentUser ? 
             
@@ -280,7 +285,7 @@ class App extends React.Component {
               <Route exact path="/shows/:uuid" render={() => <ShowShow currentUser={this.state.currentUser} showObj={this.state.currentShow}/>}/>
               <Route exact path={`/users/${this.state.currentUser.id}`} render={() => <Profile renderUser={this.renderUser} currentFriend={this.state.currentFriend} unfollowUser={this.unfollowUser} followUser={this.followUser} deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} userObj={this.state.currentUser} confirmUpdates={this.confirmUpdates} confirmDelete={this.confirmDelete} renderShow={this.renderShow}/>}/>
               <Route path={`/users/:id`} render={() => <Friend currentFriend={this.state.currentFriend} renderUser={this.renderUser} unfollowUser={this.unfollowUser} followUser={this.followUser} deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} renderShow={this.renderShow} currentUser={this.state.currentUser}/>} />
-              <Route exact path="/users" render={() => <UserContainer renderUser={this.renderUser} unfollowUser={this.unfollowUser} followUser={this.followUser} currentUser={this.state.currentUser} />} />
+              <Route exact path="/users" render={() => <UserContainer userSearch={this.state.userSearch} renderUser={this.renderUser} unfollowUser={this.unfollowUser} followUser={this.followUser} currentUser={this.state.currentUser} />} />
             </Switch>
             </>
           :

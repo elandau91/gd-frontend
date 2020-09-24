@@ -12,8 +12,9 @@ code {
 }
 
 .test {
-  margin-top: 100px;
+  margin-top: 80px;
   text-align: center;
+  font-weight: bold;
 }
 
 .headers {
@@ -74,7 +75,7 @@ code {
 }
 
 .title {
-  display: inline-block;
+  float:left
 }
 
 .likes{
@@ -84,7 +85,7 @@ code {
 }
 
 .addcomment{
-  margin-left: 70%;
+  float: right
 }
 
 .bigboard {
@@ -93,11 +94,21 @@ code {
   display: flex;
   background-color: indianred;
   border-bottom: 2.5px solid black;
+  /* attributes below here set searchbar to be fixed */
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+
+.showslist{
+  /* sets shows container below fixed searchbar */
+  padding-top: 140px;
 }
 
 .backbaby{
   background-color: indianred;
   padding-top: 10px;
+  height: 100%
 }
 
 .searchbois{
@@ -144,5 +155,6 @@ code {
 
 * {
   font-family: 'Barlow Condensed', sans-serif;
-  color: black
+  color: black;
+  
 }

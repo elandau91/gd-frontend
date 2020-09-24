@@ -80,7 +80,7 @@ class MainContainer extends React.Component {
             let newSearch = this.state.allShows.filter(show => {
                 return show.year === parseInt(searchTerm)
             })
-            console.log(newSearch)
+            
             this.setState({searchShows: newSearch})
         }
         else {
@@ -151,7 +151,7 @@ class MainContainer extends React.Component {
                     
                     </div>
                         {this.state.searchShows.length >= 1 ? 
-                        <>
+                        <div className="showslist">
                             {this.state.searchShows.map((show, index) => {
                                 return (
                                     <ListGroup horizontal key={index}>
@@ -171,9 +171,9 @@ class MainContainer extends React.Component {
                                     </ListGroup>
                                 )
                             })}
-                        </>
+                        </div>
                         :
-                        <>
+                        <div className="showslist">
                             {currentShows.map((show, index) => {
                                 return (
                                     <ListGroup horizontal key={index}>
@@ -193,7 +193,7 @@ class MainContainer extends React.Component {
                                     </ListGroup>
                                 )
                             })}
-                        </>
+                        </div>
                         }
                 </>
             }
