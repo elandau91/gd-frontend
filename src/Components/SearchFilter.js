@@ -43,7 +43,7 @@ class SearchFilter extends React.Component{
                     </Form.Control>
                     <InputGroup  className='lilfilters'>
                         <FormControl
-                        placeholder="Search by Venue or Year"
+                        placeholder="Search by Venue, City or Year"
                         aria-label="Search"
                         aria-describedby="basic-addon2"
                         name='searchTerm'

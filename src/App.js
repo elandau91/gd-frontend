@@ -5,6 +5,7 @@ import UserContainer from './Containers/UserContainer'
 import LoginForm from './Components/LoginForm'
 import SignupForm from './Components/SignupForm'
 import NavigationBar from './Components/NavigationBar'
+import Test from './Components/Test'
 import Profile from './Components/Profile'
 import Friend from './Components/Friend'
 import { Route, Switch, withRouter} from 'react-router-dom'
@@ -283,6 +284,9 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/shows" render={() => <MainContainer deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} renderShow={this.renderShow} currentUser={this.state.currentUser}/>}/>
               <Route exact path="/shows/:uuid" render={() => <ShowShow currentUser={this.state.currentUser} showObj={this.state.currentShow}/>}/>
+            
+                <Route exact path="/test" render={() => <Test/>}/>
+            
               <Route exact path={`/users/${this.state.currentUser.id}`} render={() => <Profile renderUser={this.renderUser} currentFriend={this.state.currentFriend} unfollowUser={this.unfollowUser} followUser={this.followUser} deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} userObj={this.state.currentUser} confirmUpdates={this.confirmUpdates} confirmDelete={this.confirmDelete} renderShow={this.renderShow}/>}/>
               <Route path={`/users/:id`} render={() => <Friend currentFriend={this.state.currentFriend} renderUser={this.renderUser} unfollowUser={this.unfollowUser} followUser={this.followUser} deleteFavorite={this.deleteFavorite} postFavorite={this.postFavorite} renderShow={this.renderShow} currentUser={this.state.currentUser}/>} />
               <Route exact path="/users" render={() => <UserContainer userSearch={this.state.userSearch} renderUser={this.renderUser} unfollowUser={this.unfollowUser} followUser={this.followUser} currentUser={this.state.currentUser} />} />

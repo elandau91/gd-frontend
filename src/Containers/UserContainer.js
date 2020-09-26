@@ -31,7 +31,7 @@ class UserContainer extends React.Component{
             <div className='backbaby'>
             <div className="headers">
                     <h2>
-                    <strong >Filtered Users</strong> 
+                    <strong >Users</strong> 
                     </h2>
             </div>
 
@@ -62,7 +62,7 @@ class UserContainer extends React.Component{
                 <div className='backbaby'>
                 <div className="headers">
                         <h2>
-                        <strong >All Users</strong> 
+                        <strong >Users</strong> 
                         </h2>
                 </div>
 

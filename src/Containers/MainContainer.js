@@ -86,7 +86,7 @@ class MainContainer extends React.Component {
         else {
             //console.log("venue")
             let newSearch = this.state.allShows.filter(show => {
-                 return show.venue.toLowerCase().includes(searchTerm.toLowerCase())
+                 return show.venue.toLowerCase().includes(searchTerm.toLowerCase()) || show.city.toLowerCase().includes(searchTerm.toLowerCase())
             })   
             this.setState({searchShows: newSearch})
         }
