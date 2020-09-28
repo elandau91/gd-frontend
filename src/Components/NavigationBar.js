@@ -42,7 +42,7 @@ class NavigationBar extends React.Component {
                                 <NavLink style={{ textDecoration: 'none', color: "black" }} className='navguys' to="/shows">Home</NavLink>
                                 <NavLink style={{ textDecoration: 'none', color: "black"  }} className='navguys' to={`/users/${this.props.currentUser.id}`}>Profile</NavLink>
                                 <NavLink style={{ textDecoration: 'none', color: "black"  }} className='navguys' to="/users">All Users</NavLink>
-                                <NavLink style={{ textDecoration: 'none', color: "black"  }} className='navguys' to="/test">Test</NavLink>
+                                <NavLink style={{ textDecoration: 'none', color: "black"  }} className='navguys' to="/songs">Songs</NavLink>
                                 <NavLink style={{ textDecoration: 'none', color: "black"  }} onClick={this.props.clearUser} className='navguys' to="#pricing">Logout</NavLink>
                                 </Nav>
                                     <Form inline >

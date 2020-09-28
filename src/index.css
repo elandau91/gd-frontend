@@ -24,6 +24,7 @@ code {
   display:inline-block
 }
 
+
 .spotify{
   text-align: center;
 }
@@ -81,6 +82,11 @@ code {
   padding-left: 10px;
 }
 
+.playcount{
+  display: inline-block;
+  vertical-align: top;
+}
+
 .title {
   float:left
 }
@@ -107,10 +113,27 @@ code {
   z-index: 100;
 }
 
+.littleboard {
+  padding-top: 10px;
+  padding-left: 10px;
+  display: flex;
+  background-color: indianred;
+  border-bottom: 2.5px solid black;
+  /* attributes below here set searchbar to be fixed */
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+
 .showslist{
   /* sets shows container below fixed searchbar */
   padding-top: 140px;
 }
+
+/* .songslist{
+  /* sets shows container below fixed searchbar */
+  /* padding-top: 150px;
+} */ 
 
 .backbaby{
   background-color: indianred;
@@ -122,6 +145,11 @@ code {
   /* display: inline-block; */
   flex: 1;
   padding-top: 20px;
+}
+
+.songfilters{
+  display: inline-block;
+  margin-left: 65%;
 }
 
 .lilfilters{
@@ -203,8 +231,6 @@ code {
 .logotesty{
   vertical-align: sub;
 }
-
-
 
 
 * {

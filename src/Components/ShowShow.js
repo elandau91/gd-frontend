@@ -224,6 +224,7 @@ class ShowShow extends React.Component {
                                     :
                                     
                                     this.state.featuredShow.song_refs.map((song, index) => {
+                                        console.log(song)
                                         return(
                                             <ListGroup.Item action variant="no style" key={index} onClick={this.fetchSong}>
                                                 {song.name}

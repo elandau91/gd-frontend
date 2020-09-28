@@ -154,7 +154,7 @@ class MainContainer extends React.Component {
                         <div className="showslist">
                             {this.state.searchShows.map((show, index) => {
                                 return (
-                                    <ListGroup horizontal key={index}>
+                                    <ListGroup  horizontal key={index}>
                                     
                                         <ListGroup.Item action variant="light" >
                                             

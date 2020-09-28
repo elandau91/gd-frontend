@@ -47,34 +47,7 @@ class Profile extends React.Component {
 
         return(
             <div className='backbaby'>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
             <h1 className='headers'>Profile</h1>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
-            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
             
             
             <CardColumns>
