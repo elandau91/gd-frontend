@@ -22,7 +22,8 @@ class ShowShow extends React.Component {
         showLyrics: "",
         song: "",
         //albumArt: "",
-        songURI: ""
+        songURI: "",
+        showURI: ""
     }
 
 
@@ -39,6 +40,10 @@ class ShowShow extends React.Component {
 
     lyricHandler = (e) => {
         this.setState({showLyrics: "", song: ""})
+    }
+
+    clearSpotify = (e) => {
+        this.setState({showURI: ""})
     }
     
     commentHandler = (e) => {
@@ -150,6 +155,41 @@ class ShowShow extends React.Component {
         //getLyrics(options).then((lyrics) => this.setState({showLyrics: lyrics, song: clickedSong}))
     }
 
+    spotifyCheck = (e) => {
+        console.log(this.state.featuredShow)
+        let showChoice
+        let sampleShow = this.state.featuredShow
+        
+        sampleShow.month = this.minTwoDigits(sampleShow.month )
+        sampleShow.day = this.minTwoDigits(sampleShow.day)
+
+        // console.log(`${sampleShow.month}/${sampleShow.day}/${sampleShow.year}`)
+        // console.log(showCatalog)
+        
+        for (const key in showCatalog) {
+            if (key === `${sampleShow.month}/${sampleShow.day}/${sampleShow.year}`) {
+                
+                showChoice = showCatalog[key]
+
+            } 
+            // else {
+            //     console.log(key)
+            //     showChoice = 'nada'
+            // }
+        }
+        
+        console.log(showChoice)
+
+        this.setState({...this.state, showURI: showChoice})
+
+        //console.log(showChoice)
+    }
+
+    minTwoDigits = (n) => {
+        //console.log("number", n, "length", n.length)
+      return (n.length === 1 || (n.length === undefined && n < 10) ? '0' : '') + n;
+    }
+
 
     render() {
         // let paragraphs = this.state.showLyrics.split(/[[]]/)
@@ -164,10 +204,19 @@ class ShowShow extends React.Component {
 
                 <div className='backbaby'>
                 <h3 className='test' >{this.state.featuredShow.venue}, {this.state.featuredShow.city}, {this.state.featuredShow.state} - {this.state.featuredShow.month}/{this.state.featuredShow.day}/{this.state.featuredShow.year}</h3>
+                
                 <CardGroup>
                     <Card>
                         <Card.Body>
-                            <Card.Title>Setlist <small className="text-muted">(click song for more info)</small></Card.Title>
+                            <Card.Title className="title">Setlist <small className="text-muted">(click song for more info)</small></Card.Title>
+                            {this.state.showURI || this.state.showURI === undefined ?
+                            <Button onClick={this.clearSpotify} className='addcomment' variant="outline-dark">Hide Spotify</Button>
+                            :
+                            <Button onClick={this.spotifyCheck} className='addcomment' variant="outline-success">Spotify?</Button>
+                            }
+                            
+                            <br></br>
+                            <br></br>
                                 <ListGroup >
 
                                     {this.state.featuredShow.song_refs.length === 0 ?
@@ -194,7 +243,28 @@ class ShowShow extends React.Component {
                     </Card>
                     <Card>
                         <Card.Body>
-                            {this.state.showLyrics ?
+                            {this.state.showURI === undefined ?
+                            <>
+                            <Card.Title className="spotifytitle">No Spotify</Card.Title>
+                    
+                            </>
+                            :
+                            this.state.showURI.length > 4 ?
+                            <>
+                            <Card.Title className="spotifytitle">Yes Spotify</Card.Title>
+                            
+                            <div className='spotify'>
+
+                            <PlayWidget
+                                width={400}
+                                height={580}
+                                uri={this.state.showURI}
+                                />
+                            </div>
+                            </>
+                            :
+                            this.state.showLyrics ?
+                            
                             <>
                             
                             <Card.Title className="title">{this.state.song}</Card.Title>
@@ -318,10 +388,177 @@ class ShowShow extends React.Component {
             </>
         )
     }
-
+    
 }
 
 export default ShowShow
+
+
+const showCatalog = {
+    "02/23/1968": 'spotify:album:2aipUPHU0KrGAq2QaAvlOz',
+    "02/24/1968": 'spotify:album:2aipUPHU0KrGAq2QaAvlOz',
+    "03/17/1968": 'spotify:album:04BKBau3lJBVp0xY5wzmPW',
+    "08/23/1968": 'spotify:album:1bKxygqnMcS7twRhGMK36U',
+    "08/24/1968": 'spotify:album:1bKxygqnMcS7twRhGMK36U',
+    "01/26/1969": 'spotify:album:6E7JCQINTT4vwRF4wBcsYk',
+    "02/11/1969": 'spotify:album:4Oo46t2jDGsb7Ka3hqZCgy',
+    "02/27/1969": 'spotify:album:6E7JCQINTT4vwRF4wBcsYk',
+    "02/28/1969": 'spotify:album:7vAB87YflHzcgkuIp8RprK',
+    "03/01/1969": 'spotify:album:7vAB87YflHzcgkuIp8RprK',
+    "03/02/1969": 'spotify:album:6E7JCQINTT4vwRF4wBcsYk',
+    "04/17/1969": 'spotify:album:5qtj5KMkzFx1270VxODSkD',
+    "04/26/1969": 'spotify:album:50rpHqRFD3K7bCTRBtraGH',
+    "04/27/1969": 'spotify:album:50rpHqRFD3K7bCTRBtraGH',
+    "11/08/1969": 'spotify:album:1GbnL43DSgDRIIvKTVDSjP',
+    "01/18/1970": 'spotify:album:34ZSMxipFp6GVTLUVmc009',
+    "02/13/1970": 'spotify:album:518Uq6B4Y3X1EnNr8SsGQ7',
+    "02/14/1970": 'spotify:album:518Uq6B4Y3X1EnNr8SsGQ7',
+    "05/02/1970": 'spotify:album:4NldodakYXDeK7OoEe2oBW',
+    "07/04/1970": 'spotify:album:7nsrYIDrEZvCjH4Eh53uTo',
+    "02/21/1971": 'spotify:album:4m3LKjFymPkRQeST1KEbT0',
+    "04/25/1971": 'spotify:album:4limgkCDpuhOUIrUz0U7ly',
+    "04/26/1971": 'spotify:album:4limgkCDpuhOUIrUz0U7ly',
+    "04/27/1971": 'spotify:album:4limgkCDpuhOUIrUz0U7ly',
+    "04/28/1971": 'spotify:album:4limgkCDpuhOUIrUz0U7ly',
+    "04/29/1971": 'spotify:album:4limgkCDpuhOUIrUz0U7ly',
+    "08/06/1971": 'spotify:album:3jzf0bKlIMjSQNk5wibVHT',
+    "08/07/1971": 'spotify:album:3jzf0bKlIMjSQNk5wibVHT',
+    "08/21/1971": 'spotify:album:3jzf0bKlIMjSQNk5wibVHT',
+    "10/26/1971": 'spotify:album:0lyrgO8Pmo87VJqP6ej4Ax',
+    "10/31/1971": 'spotify:album:45uNoDchZ61dBfOWGqeG0l',
+    "03/25/1972": 'spotify:album:1cnArqU8gDNK2pPksZsQZw',
+    "03/28/1972": 'spotify:album:1cnArqU8gDNK2pPksZsQZw',
+    "04/07/1972": 'spotify:album:6j3vuVPhMRB0H5CgPZ8wTd',
+    "04/08/1972": 'spotify:album:75u5l9TfTohni1xWrAUfxe',
+    "04/11/1972": 'spotify:album:65WlVRyo45LwtRg8QJfya3',
+    "04/14/1972": 'spotify:album:7l9AfB3E5teHyZ0g7WDlx1',
+    "04/16/1972": 'spotify:album:3eeKCzpqxZ68pBvyjKPvn9',
+    "04/17/1972": 'spotify:album:6Yw0qA9xNfFpkSwzwIOwOW',
+    "04/21/1972": 'spotify:album:32h6hF1i79qgFGwVh0qTJk',
+    "04/24/1972": 'spotify:album:1QPPIh78A5yXL9Lux8oPp7',
+    "04/26/1972": 'spotify:album:1iZbyAj4kT1U8lXtu4t415',
+    "04/29/1972": 'spotify:album:1WBPhea5H2NnDaNuAFI0Fr',
+    "05/03/1972": 'spotify:album:4avLivYQqNDnkxfMDTSIsJ',
+    "05/04/1972": 'spotify:album:3S1abYMND9BSJzbMcpJhj8',
+    "05/07/1972": 'spotify:album:2dey7kGDFAByEACexapiV6',
+    "05/10/1972": 'spotify:album:5T7RvMATOxVnCM4Q32S7vH',
+    "05/11/1972": 'spotify:album:2GVmIIvRpvCwQbvBNUM2K4',
+    "05/13/1972": 'spotify:album:6CMuGqQsNf5TRxFBSGY2JT',
+    "05/16/1972": 'spotify:album:7d3bghzAeP1NN27apW1YTI',
+    "05/18/1972": 'spotify:album:0M7PIylsjtbgDxZCf1tef4',
+    "05/23/1972": 'spotify:album:1K4AvpTllYaNUNcRYw9Pyn',
+    "05/24/1972": 'spotify:album:3EZpSEJ1k1BovW6Tp2Klz1',
+    "05/25/1972": 'spotify:album:29pkQOWIBGGFD1EncVkILn',
+    "05/26/1972": 'spotify:album:6tgzqy3Keqge7DAPRw2asB',
+    "07/21/1972": 'spotify:album:0nMKTUPdDm7Zk5WbIfjTKg',
+    "08/27/1972": 'spotify:album:1E4MXxSYoAMN5qpy1y6aBm',
+    "09/17/1972": 'spotify:album:7gyyunPy7dVsDB4cp7ZReW',
+    "09/21/1972": 'spotify:album:1lNa8R1EuIfJz9zhZ0H1vx',
+    "09/27/1972": 'spotify:album:2pPrEb0IJFk3W6NoQSMnZM',
+    "02/26/1973": 'spotify:album:0xp6JpT8jrnK0FV4Xf4MG0',
+    "02/28/1973": 'spotify:album:0xp6JpT8jrnK0FV4Xf4MG0',
+    "06/22/1973": 'spotify:album:3EUx54No5UpMca8zIyTpbd',
+    "06/24/1973": 'spotify:album:3EUx54No5UpMca8zIyTpbd',
+    "10/19/1973": 'spotify:album:1GU8dYooagGR6jBwbdsGCr',
+    "11/30/1973": 'spotify:album:69UIkpF0CA8RJQqCsrGgLo',
+    "12/02/1973": 'spotify:album:69UIkpF0CA8RJQqCsrGgLo',
+    "12/10/1973": 'spotify:album:700QCCumNYFQgg22mArrAw',
+    "12/19/1973": 'spotify:album:7kllcqzsmi744saUQQ7DiB',
+    "03/23/1974": 'spotify:album:4jiBYEFx7rv6C6UTYywZZO',
+    "05/17/1974": 'spotify:album:3EUx54No5UpMca8zIyTpbd',
+    "05/19/1974": 'spotify:album:3EUx54No5UpMca8zIyTpbd',
+    "05/21/1974": 'spotify:album:3EUx54No5UpMca8zIyTpbd',
+    "06/26/1974": 'spotify:album:0B87pzzLQzyevvMvdcJqHZ',
+    "06/28/1974": 'spotify:album:0B87pzzLQzyevvMvdcJqHZ',
+    "08/04/1974": 'spotify:album:0EgV8QqWBeSt1U6MBK6NnC',
+    "08/05/1974": 'spotify:album:0EgV8QqWBeSt1U6MBK6NnC',
+    "09/09/1974": 'spotify:album:2tDQBnR5OrbHg8mfGbetxf',
+    "09/11/1974": 'spotify:album:2tDQBnR5OrbHg8mfGbetxf',
+    "08/13/1975": 'spotify:album:7K5jvjbQB05gnFxsgwPvmt',
+    "06/18/1976": 'spotify:album:5h5Wx6ltrPyzb7yRFPzEyX',
+    "06/21/1976": 'spotify:album:5h5Wx6ltrPyzb7yRFPzEyX',
+    "09/25/1976": 'spotify:album:34KjKiNyuggM0g2No4ZnTv',
+    "09/28/1976": 'spotify:album:34KjKiNyuggM0g2No4ZnTv',
+    "10/09/1976": 'spotify:album:4sY292VqKmwyj1RYlhBFoA',
+    "10/10/1976": 'spotify:album:4sY292VqKmwyj1RYlhBFoA',
+    "04/30/1977": 'spotify:album:3PT8V8Rok86NvRgdP92yj9',
+    "05/08/1977": 'spotify:album:3T9UKU0jMIyrRD0PtKXqPJ',
+    "05/19/1977": 'spotify:album:4nuyKoY91WKwR6HLq7Gzkl',
+    "05/21/1977": 'spotify:album:4nuyKoY91WKwR6HLq7Gzkl',
+    "05/22/1977": 'spotify:album:3KxT9J6KTuKeXox9BUikZ4',
+    "05/28/1977": 'spotify:album:6aODZ83mana5oClW6sXEkx',
+    "09/03/1977": 'spotify:album:5uzn9YQ9XS2OoAt65U8Drg',
+    "11/05/1977": 'spotify:album:24rc4HaQfvOOSnq32PkOC1',
+    "12/29/1977": 'spotify:album:1ZMr1r6Lxv79dhy4qHZHkK',
+    "02/03/1978": 'spotify:album:1eXlwGtPpBs59cULO5gb4i',
+    "02/05/1978": 'spotify:album:1eXlwGtPpBs59cULO5gb4i',
+    "05/10/1978": 'spotify:album:1C1qBy9KA5ddXkl6Ya82gr',
+    "05/11/1978": 'spotify:album:1C1qBy9KA5ddXkl6Ya82gr',
+    "07/08/1978": 'spotify:album:6q4mDbsYJsixRai11qc2Vx',
+    "09/15/1978": 'spotify:album:1T3gjxFeNGxmbP697kIQ69',
+    "09/16/1978": 'spotify:album:1T3gjxFeNGxmbP697kIQ69',
+    "12/31/1978": 'spotify:album:3RtA7CxOnsJvfipdg4A3U8',
+    "12/26/1979": 'spotify:album:5HS80DlI8zRtS34wyS6iaR',
+    "05/15/1980": 'spotify:album:0WjqABEwiclklIWJtKfVga',
+    "05/16/1980": 'spotify:album:0WjqABEwiclklIWJtKfVga',
+    "09/03/1980": 'spotify:album:0e0DiVVupxN4D9xOspyKRU',
+    "09/04/1980": 'spotify:album:0e0DiVVupxN4D9xOspyKRU',
+    "09/30/1980": 'spotify:album:1T7YIthjEvwsxbUHZ7NdBD',
+    "10/07/1980": 'spotify:album:1T7YIthjEvwsxbUHZ7NdBD',
+    "10/10/1980": 'spotify:album:1T7YIthjEvwsxbUHZ7NdBD',
+    "10/11/1980": 'spotify:album:1T7YIthjEvwsxbUHZ7NdBD',
+    "10/13/1980": 'spotify:album:1T7YIthjEvwsxbUHZ7NdBD',
+    "10/26/1980": 'spotify:album:1T7YIthjEvwsxbUHZ7NdBD',
+    "10/27/1980": 'spotify:album:1T7YIthjEvwsxbUHZ7NdBD',
+    "10/30/1980": 'spotify:album:1T7YIthjEvwsxbUHZ7NdBD',
+    "05/06/1981": 'spotify:album:5KhX09Ik4LFkLGgwz6DxJa',
+    "08/07/1982": 'spotify:album:3Nru2SaW3yVSxqHbWNXcwc',
+    "10/14/1983": 'spotify:album:0MUCSAd1FNHH0MQBEKVxm2',
+    "11/01/1985": 'spotify:album:4QLlTAC9pOzbZo7qQ63dXm',
+    "07/04/1987": 'spotify:album:2H8oXIOkww0RuVckCa6Scw',
+    "07/19/1987": 'spotify:album:2H8oXIOkww0RuVckCa6Scw',
+    "07/24/1987": 'spotify:album:2H8oXIOkww0RuVckCa6Scw',
+    "07/26/1987": 'spotify:album:2H8oXIOkww0RuVckCa6Scw',
+    "03/27/1988": 'spotify:album:3LzNGrAGOmLbdQRSRcJzxf',
+    "04/02/1989": 'spotify:album:7CuPAAL41j1vEjYTjNh2OA',
+    "04/03/1989": 'spotify:album:7CuPAAL41j1vEjYTjNh2OA',
+    "07/07/1989": 'spotify:album:1ILNO0v1Natm87x5UPedHh',
+    "10/08/1989": 'spotify:album:6ha88H8pRux3VDEkp3S55P',
+    "10/09/1989": 'spotify:album:6HyLzcuUZALOpAGnArJB8G',
+    "10/15/1989": 'spotify:album:6HyLzcuUZALOpAGnArJB8G',
+    "10/16/1989": 'spotify:album:31bICy4msxPCUrDJbRiaYm',
+    "10/19/1989": 'spotify:album:6HyLzcuUZALOpAGnArJB8G',
+    "12/09/1989": 'spotify:album:6HyLzcuUZALOpAGnArJB8G',
+    "03/14/1990": 'spotify:album:6HyLzcuUZALOpAGnArJB8G',
+    "03/15/1990": 'spotify:album:6HyLzcuUZALOpAGnArJB8G',
+    "03/16/1990": 'spotify:album:6qO4txEK5NKSHz3L4GAD5x',
+    "03/18/1990": 'spotify:album:4bP67icXZAeeAoDlEaa0Th',
+    "03/19/1990": 'spotify:album:6qO4txEK5NKSHz3L4GAD5x',
+    "03/21/1990": 'spotify:album:6HyLzcuUZALOpAGnArJB8G',
+    "03/22/1990": 'spotify:album:6qO4txEK5NKSHz3L4GAD5x',
+    "03/24/1990": 'spotify:album:6HyLzcuUZALOpAGnArJB8G',
+    "03/25/1990": 'spotify:album:3DQoclC4aJ99gOnmYQUyWx',
+    "03/26/1990": 'spotify:album:3DQoclC4aJ99gOnmYQUyWx',
+    "03/28/1990": 'spotify:album:6HyLzcuUZALOpAGnArJB8G',
+    "03/29/1990": 'spotify:album:7xWKImlu9fzB1ApqoLLMiL',
+    "03/30/1990": 'spotify:album:6HyLzcuUZALOpAGnArJB8G',
+    "04/01/1990": 'spotify:album:6HyLzcuUZALOpAGnArJB8G',
+    "04/03/1990": 'spotify:album:4bP67icXZAeeAoDlEaa0Th',
+    "09/16/1990": 'spotify:album:2Ki3onvS212d1YPeduDkCk',
+    "06/17/1991": 'spotify:album:1f0whW4QE9bFNLpeyaPQiV',
+    "06/20/1991": 'spotify:album:67fPMapwwewntR68xRwqfM',
+    "09/25/1991": 'spotify:album:1rZjJhRyYT3MAQrCSxoF6D',
+    "06/23/1992": 'spotify:album:2fKy7P6G5wV80UHfqCuBwS',
+    "06/29/1992": 'spotify:album:2fKy7P6G5wV80UHfqCuBwS',
+    "12/16/1992": 'spotify:album:1ao7jrAGQ6xf6ywjbKM8vU',
+    "12/17/1992": 'spotify:album:1ao7jrAGQ6xf6ywjbKM8vU',
+    "09/13/1993": 'spotify:album:2fKy7P6G5wV80UHfqCuBwS',
+    "10/14/1994": 'spotify:album:2fKy7P6G5wV80UHfqCuBwS',
+    "12/11/1994": 'spotify:album:2fKy7P6G5wV80UHfqCuBwS',
+    "03/30/1995": 'spotify:album:2fKy7P6G5wV80UHfqCuBwS',
+    "04/02/1995": 'spotify:album:2fKy7P6G5wV80UHfqCuBwS',
+}
+
 
 
 const songCatalog = {

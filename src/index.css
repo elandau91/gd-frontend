@@ -24,6 +24,13 @@ code {
   display:inline-block
 }
 
+.spotify{
+  text-align: center;
+}
+.spotifytitle{
+  text-align: center;
+}
+
 .loading {
   margin-top: 100px;
   margin-left: 40%;
@@ -191,6 +198,12 @@ code {
   background-color: #eee;
   height: 4px;
 }
+
+
+.logotesty{
+  vertical-align: sub;
+}
+
 
 
 

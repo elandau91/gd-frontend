@@ -256,9 +256,9 @@ class App extends React.Component {
     fetch(`http://localhost:3000/api/v1/users/${userObj.id}`)
         .then(res => res.json())
         .then(user => {
-          console.log(user)
+          //console.log(user)
           localStorage.setItem("friend", JSON.stringify(user))
-          console.log(localStorage)
+          //console.log(localStorage)
           this.setState({
             currentFriend: user
           }

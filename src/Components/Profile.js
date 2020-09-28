@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 import MiniShow from './MiniShow'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
-// import SvgDeadditMultiLogomark1 from '../Icons/DeadditMultiLogomark'
+import SvgDeadditBlackLogomark from '../Icons/DeadditBlackLogomark'
 
 class Profile extends React.Component {
 
@@ -44,11 +44,39 @@ class Profile extends React.Component {
     }
 
     render() {
-       
+
         return(
             <div className='backbaby'>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
             <h1 className='headers'>Profile</h1>
-            {/* <SvgDeadditMultiLogomark1 /> */}
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            <span>&nbsp;&nbsp;<SvgDeadditBlackLogomark width="40px" height='40px'className='logotesty'/></span>
+            
+            
             <CardColumns>
                 <Card>
                     <Card.Img className='profimg' variant="top" src={this.props.userObj.avatar} />
@@ -196,15 +224,22 @@ class Profile extends React.Component {
                     <Card.Title>Followers</Card.Title>
                     <ListGroup>
                         {this.props.userObj.followers.map((follower, index) => {
-                            
                             return(
-        
+                            
+                                <ListGroup key={index} horizontal>
                                     <ListGroup.Item action variant="light" key={index}  >
                                     
-                                        <p>{follower.username}</p>
+                                        {/* <p>{follower.username}</p> */}
+                                        <MiniUser userObj={follower} unfollowUser={this.props.unfollowUser} followUser={this.props.followUser} renderUser={this.props.renderUser} currentUser={this.props.userObj}/>
                             
                                     </ListGroup.Item>
-                              
+
+                                {this.props.userObj.followees.find(f => {return f.id === follower.id}) ?
+                                <ListGroup.Item>Click Stealie to Unfollow</ListGroup.Item>
+                                :
+                                <ListGroup.Item>Click Stealie to Follow</ListGroup.Item>
+                                }   
+                              </ListGroup>
                             )
                         })}
 
