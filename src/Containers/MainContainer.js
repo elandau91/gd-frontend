@@ -1,6 +1,8 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
 import MiniShow from '../Components/MiniShow'
 import Pagination from '../Components/Pagination'
 import SearchFilter from '../Components/SearchFilter'
@@ -147,7 +149,10 @@ class MainContainer extends React.Component {
                     </div>
                     
                     <SearchFilter className="searchbois" filterChange={this.filterChange} searchChange={this.searchChange}/>
-                    <Pagination disabled className="searchbois" totalRecords={totalShows} pageLimit={30} pageNeighbours={2} onPageChanged={this.onPageChanged} />
+                    <Pagination className="searchbois" totalRecords={totalShows} pageLimit={30} pageNeighbours={2} onPageChanged={this.onPageChanged} /> 
+                                
+                    
+                    
                     
                     </div>
                         {this.state.searchShows.length >= 1 ? 

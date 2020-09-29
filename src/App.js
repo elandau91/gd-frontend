@@ -11,6 +11,7 @@ import Friend from './Components/Friend'
 import { Route, Switch, withRouter} from 'react-router-dom'
 import ShowShow from './Components/ShowShow';
 
+
 class App extends React.Component {
   
   state = {
@@ -45,6 +46,7 @@ class App extends React.Component {
           if (data.error === "INVALID") {
             this.props.history.push("/")
             window.alert("Wrong Username or Password, please try again. :)")
+            
           } else {
           localStorage.setItem("token", data.jwt)
           this.setState({
@@ -157,6 +159,7 @@ class App extends React.Component {
     .then(updatedUser => {
       if(updatedUser.error === 'failed to update user') {
         window.alert("Username already exists, think outside the box.")
+        
       } else {
         this.setState({...this.state, currentUser: updatedUser}) 
       }

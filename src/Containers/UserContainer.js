@@ -17,6 +17,7 @@ class UserContainer extends React.Component{
     }
 
     render() {
+        const headerClass = ['border-gray border-right'].join(' ').trim();
         let filterUsers = this.state.allUsers.filter(user => {return user.username.toLowerCase().includes(this.props.userSearch)})
         return(
             <>
@@ -29,11 +30,12 @@ class UserContainer extends React.Component{
             :
             this.props.userSearch !== null ?
             <div className='backbaby'>
-            <div className="headers">
-                    <h2>
+            <div className="userpage">
+                    <h2 style={{color: "white"}} className={headerClass}>
                     <strong >Users</strong> 
                     </h2>
             </div>
+            
 
                     {filterUsers.map((user, index) => {
                         return (
@@ -60,8 +62,8 @@ class UserContainer extends React.Component{
             </div>
             :
                 <div className='backbaby'>
-                <div className="headers">
-                        <h2>
+                <div className="userpage">
+                        <h2 style={{color: "white"}} className={headerClass}>
                         <strong >Users</strong> 
                         </h2>
                 </div>

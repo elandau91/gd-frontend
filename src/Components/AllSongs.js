@@ -7,7 +7,7 @@ import PlayWidget from 'react-spotify-widgets';
 import SvgDeadditBlueLogomark from '../Icons/DeadditBlueLogomark'
 import Spinner from 'react-bootstrap/Spinner'
 import SvgDeadditMultiLogomark from '../Icons/DeadditMultiLogomark'
-import Button from 'react-bootstrap/Button'
+
     
 
 class AllSongs extends React.Component{
@@ -99,6 +99,7 @@ class AllSongs extends React.Component{
     }
 
     render() {
+        const headerClass = ['border-gray border-right'].join(' ').trim();
         return (
             
             <>
@@ -110,18 +111,21 @@ class AllSongs extends React.Component{
                 </div>
             :
                 <>
-                <div className='backbaby'>
+            <div className='littleboard'>
                     
 
-                <div className="headers">
-                        <h2>
+                <div className="currentpage">
+                        <h2 style={{color: "white"}} className={headerClass}>
                             {this.state.searchSongs.length > 0 ?
                                 <strong>{this.state.searchSongs.length} Songs</strong> 
                             :
                                 <strong>{this.state.allSongs.length} Songs</strong> 
                             }
+                            &nbsp;
+                            &nbsp;
                         </h2>
                 </div>
+                <span className="current-page d-inline-block h-100 pl-4 text-secondary "></span>
                 <div className='songfilters'>
                 
                 <Form inline className='lilfilters'>
@@ -153,14 +157,15 @@ class AllSongs extends React.Component{
                         
                     </InputGroup>
                     </Form>
-            </div>
+                </div>
             </div>
 
+            <div className='songslist'>
                         {this.state.searchSongs.length > 0 ?
                         this.state.searchSongs.map((song, index) => {
                             
                             return (
-                                <div className='songslist'>
+                                
 
                         
                                 <ListGroup key={index} horizontal>
@@ -217,9 +222,11 @@ class AllSongs extends React.Component{
                                 }
                                 </ListGroup>
                                     
-                               </div>
+                               
                                )
-                            })
+                            }
+                            )
+                            
                         :
                         this.state.allSongs.map((song, index) => {
                             
@@ -282,7 +289,9 @@ class AllSongs extends React.Component{
                                
                                )
                             })
-                            }
+                    
+                    }   
+                    </div>     
                 </>
             }
           </>

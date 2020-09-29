@@ -15,7 +15,7 @@ class MiniShow extends React.Component {
         return(
             <>
             <Link style={{ textDecoration: 'none' }} to={`/shows/${this.props.showObj.uuid}`} onClick={() => this.props.renderShow(this.props.showObj)}>
-                <h5 className="title">{this.props.showObj.venue}, {this.props.showObj.city}, {this.props.showObj.state} - {this.props.showObj.month}/{this.props.showObj.day}/{this.props.showObj.year}</h5>
+                <h5 className="title">{this.props.showObj.venue}, {this.props.showObj.city}, {this.props.showObj.state === "" ? this.props.showObj.country : this.props.showObj.state } - {this.props.showObj.month}/{this.props.showObj.day}/{this.props.showObj.year}</h5>
             </ Link>
            
 

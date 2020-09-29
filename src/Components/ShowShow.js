@@ -3,6 +3,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card'
 import CardGroup from 'react-bootstrap/CardGroup'
 import ListGroup from 'react-bootstrap/ListGroup'
+import ProgressBar from 'react-bootstrap/ProgressBar'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
@@ -101,6 +102,7 @@ class ShowShow extends React.Component {
     fetchSong = (e) => {
        let clickedSong = e.target.textContent
        let songChoice
+       
         
         for (const key in songCatalog) {
             if (key === clickedSong) {
@@ -137,10 +139,17 @@ class ShowShow extends React.Component {
             // ${song.albumArt}
             // ${song.lyrics}`)
             // console.log(song.lyrics)
+            //console.log(this.state.song, clickedSong)
             if (song === null) {
-                this.setState({song: clickedSong})
-            } else {
-
+                
+                this.lyricHandler()
+            } 
+            else if (clickedSong.includes("svg") === true) {
+                
+                this.lyricHandler()
+            }
+            else {
+                
                 this.setState({
                     showLyrics: song.lyrics, 
                     song: clickedSong,
@@ -203,8 +212,9 @@ class ShowShow extends React.Component {
             :   
 
                 <div className='backbaby'>
+                <div className='showtitletime'>
                 <h3 className='test' >{this.state.featuredShow.venue}, {this.state.featuredShow.city}, {this.state.featuredShow.state} - {this.state.featuredShow.month}/{this.state.featuredShow.day}/{this.state.featuredShow.year}</h3>
-                
+                </div>
                 <CardGroup>
                     <Card>
                         <Card.Body>
@@ -224,7 +234,7 @@ class ShowShow extends React.Component {
                                     :
                                     
                                     this.state.featuredShow.song_refs.map((song, index) => {
-                                        console.log(song)
+                                        
                                         return(
                                             <ListGroup.Item action variant="no style" key={index} onClick={this.fetchSong}>
                                                 {song.name}
@@ -247,13 +257,14 @@ class ShowShow extends React.Component {
                             {this.state.showURI === undefined ?
                             <>
                             <Card.Title className="spotifytitle">No Spotify</Card.Title>
-                    
+                            <ProgressBar striped variant="danger" now={100} />
                             </>
                             :
                             this.state.showURI.length > 4 ?
                             <>
                             <Card.Title className="spotifytitle">Yes Spotify</Card.Title>
-                            
+                            <ProgressBar striped variant="success" now={100} />
+                            <br></br>
                             <div className='spotify'>
 
                             <PlayWidget

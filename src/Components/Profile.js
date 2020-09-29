@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 import MiniShow from './MiniShow'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
-import SvgDeadditBlackLogomark from '../Icons/DeadditBlackLogomark'
+
 
 class Profile extends React.Component {
 
@@ -51,6 +51,30 @@ class Profile extends React.Component {
             
             
             <CardColumns>
+                
+                <Card>
+                    <Card.Body>
+                    <Card.Title>Favorite Shows</Card.Title>
+                        {this.props.userObj.shows.map((show, index) => {
+                            
+                            return(
+                                <ListGroup horizontal key={index}>
+        
+                                    <ListGroup.Item action variant="light"  >
+                                    
+                                        <MiniShow  showObj={show} deleteFavorite={this.props.deleteFavorite} postFavorite={this.props.postFavorite} renderShow={this.props.renderShow} currentUser={this.props.userObj}/>
+                            
+                                    </ListGroup.Item>
+                                    {/* <ListGroup.Item>Unlike</ListGroup.Item> */}
+                                </ListGroup>
+                            )
+                        })}
+                    </Card.Body>
+                    <Card.Footer>
+                    <small className="text-muted">Currently you have {this.props.userObj.shows.length} favorite show(s)</small>
+                    </Card.Footer>
+                </Card>
+
                 <Card>
                     <Card.Img className='profimg' variant="top" src={this.props.userObj.avatar} />
                     <Card.Body>
@@ -135,31 +159,7 @@ class Profile extends React.Component {
                         
                     </Card.Footer>
                 </Card>
-                <Card>
-                    <Card.Body>
-                    <Card.Title>Favorite Shows</Card.Title>
-                        {this.props.userObj.shows.map((show, index) => {
-                            
-                            return(
-                                <ListGroup horizontal key={index}>
-        
-                                    <ListGroup.Item action variant="light"  >
-                                    
-                                        <MiniShow  showObj={show} deleteFavorite={this.props.deleteFavorite} postFavorite={this.props.postFavorite} renderShow={this.props.renderShow} currentUser={this.props.userObj}/>
-                            
-                                    </ListGroup.Item>
-                                    {/* <ListGroup.Item>Unlike</ListGroup.Item> */}
-                                </ListGroup>
-                            )
-                        })}
-
-                    
-                    </Card.Body>
-                    <Card.Footer>
-                    <small className="text-muted">Currently you have {this.props.userObj.shows.length} favorite show(s)</small>
-                    </Card.Footer>
-                </Card>
-
+                
                 <Card>
                     <Card.Body>
 
