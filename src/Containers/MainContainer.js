@@ -21,7 +21,7 @@ class MainContainer extends React.Component {
       
       componentDidMount() {
         let sortedShows = []
-        fetch('http://deaditt-backend.herokuapp.com/api/v1/shows')
+        fetch('https://deaditt-backend.herokuapp.com/api/v1/shows')
         .then(res => res.json())
         .then(shows => {
           sortedShows = this.leSort(shows)

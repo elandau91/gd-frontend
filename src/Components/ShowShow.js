@@ -29,7 +29,7 @@ class ShowShow extends React.Component {
 
 
     componentDidMount() {
-        fetch(`http://deaditt-backend.herokuapp.com/api/v1/shows/${this.props.showObj.uuid}`)
+        fetch(`https://deaditt-backend.herokuapp.com/api/v1/shows/${this.props.showObj.uuid}`)
         .then(res => res.json())
         .then(showFetch => {
             this.setState({

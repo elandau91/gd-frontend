@@ -25,7 +25,7 @@ class AllSongs extends React.Component{
     }
 
     componentDidMount() {
-        fetch('http://deaditt-backend.herokuapp.com/api/v1/song_refs')
+        fetch('https://deaditt-backend.herokuapp.com/api/v1/song_refs')
         .then(res => res.json())
         .then(songs=> {
            let sorted = songs.sort(function(a, b) {
