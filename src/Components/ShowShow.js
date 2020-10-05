@@ -29,7 +29,7 @@ class ShowShow extends React.Component {
 
 
     componentDidMount() {
-        fetch(`http://localhost:3000/api/v1/shows/${this.props.showObj.uuid}`)
+        fetch(`http://deaditt-backend.herokuapp.com/api/v1/shows/${this.props.showObj.uuid}`)
         .then(res => res.json())
         .then(showFetch => {
             this.setState({
@@ -140,16 +140,17 @@ class ShowShow extends React.Component {
             // ${song.lyrics}`)
             // console.log(song.lyrics)
             //console.log(this.state.song, clickedSong)
+            //console.log(song)
             if (song === null) {
-                
+                //console.log("hi")
                 this.lyricHandler()
             } 
             else if (clickedSong.includes("svg") === true) {
-                
+                //console.log("ho")
                 this.lyricHandler()
             }
             else {
-                
+                //console.log("he")
                 this.setState({
                     showLyrics: song.lyrics, 
                     song: clickedSong,
@@ -165,7 +166,7 @@ class ShowShow extends React.Component {
     }
 
     spotifyCheck = (e) => {
-        console.log(this.state.featuredShow)
+        
         let showChoice
         let sampleShow = this.state.featuredShow
         
@@ -187,7 +188,7 @@ class ShowShow extends React.Component {
             // }
         }
         
-        console.log(showChoice)
+        
 
         this.setState({...this.state, showURI: showChoice})
 

@@ -40,7 +40,7 @@ class App extends React.Component {
       body: JSON.stringify({user: userInfo})
     } 
     
-    fetch('http://localhost:3000/api/v1/login', configObj)
+    fetch('http://deaditt-backend.herokuapp.com/api/v1/login', configObj)
         .then(response => response.json())
         .then(data => {
           if (data.error === "INVALID") {
@@ -70,7 +70,7 @@ class App extends React.Component {
     }   
 
     
-    fetch('http://localhost:3000/api/v1/new', configObj)
+    fetch('http://deaditt-backend.herokuapp.com/api/v1/new', configObj)
       .then(response => response.json())
       .then(data => {
         if(data.error === 'failed to create user'){
@@ -92,7 +92,7 @@ class App extends React.Component {
     
     
     if (token) {
-      fetch('http://localhost:3000/api/v1/profile', {
+      fetch('http://deaditt-backend.herokuapp.com/api/v1/profile', {
         method: "GET",
         headers: {Authorization: `Bearer ${token}`}
       }).then(res => res.json())
@@ -125,7 +125,7 @@ class App extends React.Component {
       method: "DELETE"
     }
 
-    fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}`, options)
+    fetch(`http://deaditt-backend.herokuapp.com/api/v1/users/${this.state.currentUser.id}`, options)
     .then(res => {
       localStorage.removeItem("token")
       localStorage.removeItem("show")
@@ -154,7 +154,7 @@ class App extends React.Component {
       })
     }
 
-    fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}`, options)
+    fetch(`http://deaditt-backend.herokuapp.com/api/v1/users/${this.state.currentUser.id}`, options)
     .then(res => res.json())
     .then(updatedUser => {
       if(updatedUser.error === 'failed to update user') {
@@ -180,7 +180,7 @@ class App extends React.Component {
       })
     }
 
-    fetch('http://localhost:3000/api/v1/fave_shows', options)
+    fetch('http://deaditt-backend.herokuapp.com/api/v1/fave_shows', options)
     .then(res => res.json())
     .then(
       newFave => {
@@ -204,7 +204,7 @@ class App extends React.Component {
       method: "DELETE"
     }
 
-    fetch(`http://localhost:3000/api/v1/fave_shows/${faveId}`, options)
+    fetch(`http://deaditt-backend.herokuapp.com/api/v1/fave_shows/${faveId}`, options)
     .then(res => {
       this.setState({
         currentUser: newProps
@@ -223,7 +223,7 @@ class App extends React.Component {
       method: "DELETE"
     }
 
-    fetch(`http://localhost:3000/api/v1/follows/${del[0].id}`, options)
+    fetch(`http://deaditt-backend.herokuapp.com/api/v1/follows/${del[0].id}`, options)
     .then(res => {
       this.setState({currentUser: newProps})
     })
@@ -242,7 +242,7 @@ class App extends React.Component {
       })
     }
 
-    fetch(`http://localhost:3000/api/v1/follows`, options)
+    fetch(`http://deaditt-backend.herokuapp.com/api/v1/follows`, options)
     .then(res => res.json())
     .then(followed => {
       let newProps = this.state.currentUser
@@ -256,7 +256,7 @@ class App extends React.Component {
   }
 
   renderUser = (userObj) => {
-    fetch(`http://localhost:3000/api/v1/users/${userObj.id}`)
+    fetch(`http://deaditt-backend.herokuapp.com/api/v1/users/${userObj.id}`)
         .then(res => res.json())
         .then(user => {
           //console.log(user)

@@ -36,6 +36,30 @@ class Friend extends React.Component {
                 {/* <SvgDeadditMultiLogomark1 /> */}
                 <CardColumns>
                     <Card>
+                        <Card.Body>
+                        <Card.Title>Favorite Shows</Card.Title>
+                            {this.props.currentFriend.shows.map((show, index) => {
+                                
+                                return(
+                                    <ListGroup horizontal key={index}>
+            
+                                        <ListGroup.Item action variant="light"  >
+                                        
+                                            <MiniShow  showObj={show} deleteFavorite={this.props.deleteFavorite} postFavorite={this.props.postFavorite} renderShow={this.props.renderShow} currentUser={this.props.currentUser}/>
+                                
+                                        </ListGroup.Item>
+                                        
+                                    </ListGroup>
+                                 )
+                            })}
+    
+                        
+                        </Card.Body>
+                        <Card.Footer>
+                        <small className="text-muted">{this.props.currentFriend.username} has {this.props.currentFriend.shows.length} favorite show(s)</small>
+                        </Card.Footer>
+                    </Card>
+                    <Card>
                         <Card.Img className='profimg' variant="top" src={this.props.currentFriend.avatar} />
                         <Card.Body>
                         {/* <Card.Title>User Information</Card.Title> */}
@@ -65,30 +89,6 @@ class Friend extends React.Component {
                                         } 
                             </ListGroup>
                             
-                        </Card.Footer>
-                    </Card>
-                    <Card>
-                        <Card.Body>
-                        <Card.Title>Favorite Shows</Card.Title>
-                            {this.props.currentFriend.shows.map((show, index) => {
-                                
-                                return(
-                                    <ListGroup horizontal key={index}>
-            
-                                        <ListGroup.Item action variant="light"  >
-                                        
-                                            <MiniShow  showObj={show} deleteFavorite={this.props.deleteFavorite} postFavorite={this.props.postFavorite} renderShow={this.props.renderShow} currentUser={this.props.currentUser}/>
-                                
-                                        </ListGroup.Item>
-                                        
-                                    </ListGroup>
-                                 )
-                            })}
-    
-                        
-                        </Card.Body>
-                        <Card.Footer>
-                        <small className="text-muted">{this.props.currentFriend.username} has {this.props.currentFriend.shows.length} favorite show(s)</small>
                         </Card.Footer>
                     </Card>
     

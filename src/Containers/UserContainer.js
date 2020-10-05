@@ -11,7 +11,7 @@ class UserContainer extends React.Component{
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/api/v1/users')
+        fetch('http://deaditt-backend.herokuapp.com/api/v1/users')
         .then(res => res.json())
         .then(users => this.setState({allUsers: users}))
     }
