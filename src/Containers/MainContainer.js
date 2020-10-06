@@ -19,6 +19,7 @@ class MainContainer extends React.Component {
         searchShows: []
       }
       
+      //loads shows immediately and sorts them with lesort
       componentDidMount() {
         let sortedShows = []
         fetch('https://deaditt-backend.herokuapp.com/api/v1/shows')
@@ -31,11 +32,13 @@ class MainContainer extends React.Component {
         })
       }
 
+      //helps format YAML dates that are improperly formatted
       minTwoDigits = (n) => {
           //console.log("number", n, "length", n.length)
         return (n.length === 1 || (n.length === undefined && n < 10) ? '0' : '') + n;
       }
 
+      //sorts shows immediately upon mounting while also formatting them
       leSort = (shows) => {
           return shows.sort((a, b) => {
                 a.month = this.minTwoDigits(a.month)
@@ -48,7 +51,7 @@ class MainContainer extends React.Component {
           
       }
 
-
+      //renders different shows depending on page changed
       onPageChanged = (data) => {
           
         const { allShows } = this.state;
@@ -59,6 +62,7 @@ class MainContainer extends React.Component {
         this.setState({ currentPage, currentShows, totalPages });
       }
 
+      //switches filter from oldest to most recent and vice versa
       filterChange = (e) => {  
         let newShows = this.state.allShows.reverse()
         let newCurrentShows = newShows.slice(0, 0 + 30);
@@ -68,6 +72,7 @@ class MainContainer extends React.Component {
         })
       }
 
+      //based on search term, this method returns specific results (year, venue, location)
       searchChange = (searchTerm, innerValue) => {
        //console.log(this.state.searchShows)
        

@@ -15,15 +15,18 @@ class LoginForm extends React.Component {
         password: ""
     }
 
+    //controlled form changes state as user enters information
     changeHelper = (e) => {
         this.setState({...this.state, [e.target.name]:e.target.value })
     }
 
+    //submits login credentials to app component for verification
     submitHelper = (e) => {
         e.preventDefault()
         this.props.loginHandler(this.state)
     }
 
+    //takes user to create user component
     goToSignup = () => {
         this.props.history.push("/createuser")
     }

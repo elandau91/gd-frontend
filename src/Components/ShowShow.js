@@ -27,7 +27,7 @@ class ShowShow extends React.Component {
         showURI: ""
     }
 
-
+    //loads specific show information
     componentDidMount() {
         fetch(`https://deaditt-backend.herokuapp.com/api/v1/shows/${this.props.showObj.uuid}`)
         .then(res => res.json())
@@ -39,22 +39,27 @@ class ShowShow extends React.Component {
         })
     }
 
+    //toggles lyrics to off
     lyricHandler = (e) => {
         this.setState({showLyrics: "", song: ""})
     }
 
+    //toggles spotify to off
     clearSpotify = (e) => {
         this.setState({showURI: ""})
     }
     
+    //toggles ternary to comment mode or off comment mode
     commentHandler = (e) => {
         this.setState({comment: !this.state.comment})
     }
 
+    //controlled form for comments
     changeHandler = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
 
+    //creates comment for show
     submitComment = (e) => {
         // console.log(this.state.content)
         // this.props.postComment(this.state.content)
@@ -85,6 +90,7 @@ class ShowShow extends React.Component {
           })
     }
 
+    //deletes comment on show
     removeComment = (comment) => {
         const options = {
             method: "DELETE"
@@ -99,6 +105,7 @@ class ShowShow extends React.Component {
         })
     }
 
+    //fetches both spotifysong  and genius API lyrics at the same time
     fetchSong = (e) => {
        let clickedSong = e.target.textContent
        let songChoice
@@ -111,12 +118,14 @@ class ShowShow extends React.Component {
         }
         
         const options = {
+            //heroku required actual key here to work
             apiKey: 'SE4l1fZX72vFKyJFXZ2BmKSZ1ASZHJ3thfhh-F82B-cAOIMcrO4gO7QrWy63mnWP',
             title: clickedSong,
             artist: 'Grateful Dead',
             optimizeQuery: true
         };
 
+        //cors blocker so genius api can be reached
         let cors_api_host = 'cors-anywhere.herokuapp.com';
         let cors_api_url = 'https://' + cors_api_host + '/';
         let slice = [].slice;
@@ -132,25 +141,16 @@ class ShowShow extends React.Component {
             return open.apply(this, args);
         };
         
+        //gets song lyrics from genius api
         getSong(options).then((song) => {
-            // console.log(`
-            // ${song.id}
-            // ${song.url}
-            // ${song.albumArt}
-            // ${song.lyrics}`)
-            // console.log(song.lyrics)
-            //console.log(this.state.song, clickedSong)
-            //console.log(song)
+        
             if (song === null) {
-                //console.log("hi")
                 this.lyricHandler()
             } 
-            else if (clickedSong.includes("svg") === true) {
-                //console.log("ho")
+            else if (clickedSong.includes("svg") === true) {   
                 this.lyricHandler()
             }
             else {
-                //console.log("he")
                 this.setState({
                     showLyrics: song.lyrics, 
                     song: clickedSong,
@@ -162,9 +162,9 @@ class ShowShow extends React.Component {
             }
         );
 
-        //getLyrics(options).then((lyrics) => this.setState({showLyrics: lyrics, song: clickedSong}))
     }
 
+    //checks showcatalog below to see if show exists in spotify
     spotifyCheck = (e) => {
         
         let showChoice
@@ -187,14 +187,13 @@ class ShowShow extends React.Component {
             //     showChoice = 'nada'
             // }
         }
-        
-        
 
         this.setState({...this.state, showURI: showChoice})
 
         //console.log(showChoice)
     }
 
+    //function to properly format spotify dataset
     minTwoDigits = (n) => {
         //console.log("number", n, "length", n.length)
       return (n.length === 1 || (n.length === undefined && n < 10) ? '0' : '') + n;
@@ -406,7 +405,7 @@ class ShowShow extends React.Component {
 
 export default ShowShow
 
-
+//spotify URI for shows
 const showCatalog = {
     "02/23/1968": 'spotify:album:2aipUPHU0KrGAq2QaAvlOz',
     "02/24/1968": 'spotify:album:2aipUPHU0KrGAq2QaAvlOz',
@@ -573,7 +572,7 @@ const showCatalog = {
 }
 
 
-
+//song URIs for spotify
 const songCatalog = {
  "Alabama Getaway": '6MjGugpOlSauS7CrYZgqDw',
  'All Along The Watchtower': '5LbmdmT7vxm2w3C5eNERkM',

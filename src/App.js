@@ -21,7 +21,7 @@ class App extends React.Component {
     userSearch: null
   }
 
-
+  //this is a logout method
   clearUser = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("show")
@@ -29,6 +29,7 @@ class App extends React.Component {
     this.setState({currentUser: null}, () => this.props.history.push("/"))
   }
 
+  //this is a log-in method passed as a prop to the log-in component
   loginHandler = (userInfo) => {
       
     let configObj = {
@@ -58,6 +59,7 @@ class App extends React.Component {
     
   }
 
+  //this is a create new user method, passed down as a prop to sign up form
   createHandler = (userInfo) => {
         
     let configObj = {
@@ -83,6 +85,8 @@ class App extends React.Component {
       })
 }
 
+
+  //refresh method. Keeps user logged in, show page and friend page saved on refresh
   componentDidMount() {
     const token = localStorage.getItem("token")
     const showString = localStorage.getItem("show")
@@ -112,6 +116,8 @@ class App extends React.Component {
 
   }
 
+
+  //renders a show page for specific show/concert, then saves token
   renderShow = (showObj) => {
     localStorage.setItem("show", JSON.stringify(showObj))
     this.setState({
@@ -119,6 +125,8 @@ class App extends React.Component {
     })
   }
 
+
+  //this method deletes a user's account and subsequently logs you out
   confirmDelete = () => {
 
     const options = {
@@ -139,6 +147,8 @@ class App extends React.Component {
 
   }
 
+
+  //this method allows a user to update username, email, avatar or any combination thereof
   confirmUpdates = ({username, email, avatar}) => {
 
     const options = {
@@ -167,6 +177,8 @@ class App extends React.Component {
 
   }
 
+
+  //this method allows users to save favorite shows and have them persist
   postFavorite = (showUuid) => {
     const options = {
       method: "POST",
@@ -194,6 +206,8 @@ class App extends React.Component {
     )
   }
 
+
+  //this method allows users to unfavorite shows. 
   deleteFavorite = (fave) => {
     let faveId = fave.id 
     let newProps = this.state.currentUser
@@ -212,6 +226,8 @@ class App extends React.Component {
     })
   }
 
+
+  //this method allows users to unfollow other users they are following
   unfollowUser = (info) => {
     // console.log(this.state.currentUser)
     let newProps = this.state.currentUser
@@ -229,6 +245,8 @@ class App extends React.Component {
     })
   }
 
+
+  //this method allows users to follow other user profiles
   followUser = (info) => {
     const options = {
       method: "POST",
@@ -255,6 +273,8 @@ class App extends React.Component {
     })
   }
 
+
+  //this method renders other user profiles and helps them persist on refresh
   renderUser = (userObj) => {
     fetch(`https://deaditt-backend.herokuapp.com/api/v1/users/${userObj.id}`)
         .then(res => res.json())
@@ -270,6 +290,8 @@ class App extends React.Component {
         })
   }
 
+
+  //this alllows you to search for users in the navbar from anywhere on the site
   searchForUser = (searchTerm) => {
     this.setState({...this.state, userSearch: searchTerm}, () => this.props.history.push("/users"))
   }

@@ -10,6 +10,7 @@ class UserContainer extends React.Component{
         allUsers: []
     }
 
+    //loads all users from DB
     componentDidMount() {
         fetch('https://deaditt-backend.herokuapp.com/api/v1/users')
         .then(res => res.json())

@@ -17,10 +17,12 @@ class NavigationBar extends React.Component {
         clear: false
     }
 
+    //controlled form for user search
     searchHandler = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
 
+    //submission for user search, sent to app for verification and page change
     submitHandler = (e) => {
         e.preventDefault()
         this.props.searchForUser(this.state.searchTerm)

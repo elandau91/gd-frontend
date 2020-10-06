@@ -17,15 +17,18 @@ class SignupForm extends React.Component {
         avatar: ""
     }
 
+    //controlled form for user inputs
     changeHelper = (e) => {
         this.setState({...this.state, [e.target.name]:e.target.value })
     }
 
+    //passes submission up to app for verification and component switch if neccesary
     submitHelper = (e) => {
         e.preventDefault()
         this.props.createHandler(this.state)
     }
 
+    //switches to login component
     goToLogin = () => {
         this.props.history.push("/")
     }

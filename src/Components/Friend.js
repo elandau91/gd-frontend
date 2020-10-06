@@ -10,21 +10,6 @@ import SvgDeadditMultiLogomark from '../Icons/DeadditMultiLogomark'
 
 class Friend extends React.Component {
 
-    // state = {
-    //     friend: this.props.currentFriend
-    // }
-
-    // componentDidMount() {
-    //     this.setState({friend: this.props.currentFriend})
-    // }
-
-    // componentDidUpdate() {
-    //     this.setState({friend: this.props.currentFriend})
-    // }
-
-    
-
-
     render(){
        
         return(

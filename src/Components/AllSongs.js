@@ -19,11 +19,15 @@ class AllSongs extends React.Component{
         songShow: null,
     }
 
+
+    //reactive search as user types in search bar
     changeHandler = (e) => {
         let newSearch = this.state.allSongs.filter(song => {return song.name.toLowerCase().includes(e.target.value.toLowerCase())})
         this.setState({searchSongs: newSearch})
     }
 
+
+    //loads all songs upon page visit
     componentDidMount() {
         fetch('https://deaditt-backend.herokuapp.com/api/v1/song_refs')
         .then(res => res.json())
@@ -37,8 +41,9 @@ class AllSongs extends React.Component{
         })
     }
 
+
+    //allows users to select songs to view
     songSelect = (clickedSong) => {
-        
 
         let songChoice
         
@@ -54,6 +59,7 @@ class AllSongs extends React.Component{
         })
     }
 
+    //deselects song that is currently being viewed
     clearSelection = (e) => {
         this.setState({
             songURI: null,
@@ -61,6 +67,8 @@ class AllSongs extends React.Component{
         })
     }
 
+
+    //filters song list depending on what is selected from dropdown (a-z, z-a, most played, least played)
     filterChange = (e) => {
         
         if (e.target.value === "most") {

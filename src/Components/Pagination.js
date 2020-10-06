@@ -39,6 +39,7 @@ class Pagination extends React.Component {
     this.state = { currentPage: 1 };
   }
 
+  //method to render page numbers depending on place within pagination
   fetchPageNumbers = () => {
     const totalPages = this.totalPages;
     const currentPage = this.state.currentPage;
@@ -139,10 +140,12 @@ class Pagination extends React.Component {
     );
   }
 
+  //automatically takes user to page one on refresh(design choice)
   componentDidMount() {
     this.gotoPage(1);
   }
 
+  //run upon click on specific page after submit event prevented
   gotoPage = page => {
     const { onPageChanged = f => f } = this.props;
     const currentPage = Math.max(0, Math.min(page, this.totalPages));
@@ -156,17 +159,20 @@ class Pagination extends React.Component {
     this.setState({ currentPage }, () => onPageChanged(paginationData));
   }
 
+  //handles specific page click
   handleClick = page => evt => {
     evt.preventDefault();
     this.gotoPage(page);
   }
 
+  //handles page move to the left
   handleMoveLeft = evt => {
     evt.preventDefault();
     // console.log("current page", this.state.currentPage, )
     this.gotoPage(this.state.currentPage - (this.pageNeighbors * 2) - 1);
   }
 
+  //handles page move to the right
   handleMoveRight = evt => {
     evt.preventDefault();
     this.gotoPage(this.state.currentPage + (this.pageNeighbors * 2) + 1);

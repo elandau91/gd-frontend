@@ -11,10 +11,12 @@ class SearchFilter extends React.Component{
         clear: false
     }
 
+    //controlled form for search values
     changeHandler = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
 
+    //toggles search button, and also send search information to main container
     submitHandler = (e) => {
         this.props.searchChange(this.state.searchTerm, e.target.textContent)
         this.setState({

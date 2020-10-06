@@ -3,14 +3,12 @@ import Sky from 'react-sky';
  
 
 
-// you can pass imported images to Sky
-// import myImage from "./media/myImage.png"
 
+//react sky animation for login
 class Animation extends Component {
                                             
   
   render() {
-    //let stealie = <img src="https://i.redd.it/l108on95e4401.png" height="50px" width="50px"/>
     return (
       <div>
         

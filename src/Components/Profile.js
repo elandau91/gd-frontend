@@ -20,6 +20,7 @@ class Profile extends React.Component {
         avatar: this.props.userObj.avatar
     }
 
+    //opens or closes edit user options
     editHandler = (e) => {
         this.setState({
             edit: !this.state.edit,
@@ -27,6 +28,7 @@ class Profile extends React.Component {
         })
     }
 
+    //opens or closes delete user options
     deleteHandler = (e) => {
         this.setState({
             edit: false,
@@ -34,10 +36,12 @@ class Profile extends React.Component {
         })
     }
 
+    //controlled form for user edits
     changeHelper = (e) => {
         this.setState({...this.state, [e.target.name]:e.target.value })
     }
 
+    //sends updated user information to app for verification and updates
     updateHandler = (e) =>{
         this.props.confirmUpdates(this.state)
         this.setState({edit: false})

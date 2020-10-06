@@ -5,6 +5,7 @@ import SvgDeadditMultiLogomark from '../Icons/DeadditMultiLogomark'
 
 class MiniShow extends React.Component {
 
+    
     render() {
         let faveShow = this.props.currentUser.fave_shows.find(fave_show => {
             return fave_show.show_id === this.props.showObj.uuid
