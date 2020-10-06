@@ -71,7 +71,7 @@ class ShowShow extends React.Component {
             })
           }
       
-          fetch(`http://deaditt-backend.herokuapp.com/api/v1/comment_shows`, options)
+          fetch(`https://deaditt-backend.herokuapp.com/api/v1/comment_shows`, options)
           .then(res => res.json())
           .then(newComment => {
               let newShow = this.state.featuredShow
@@ -90,7 +90,7 @@ class ShowShow extends React.Component {
             method: "DELETE"
         }
 
-        fetch(`http://deaditt-backend.herokuapp.com/api/v1/comment_shows/${comment.id}`, options)
+        fetch(`https://deaditt-backend.herokuapp.com/api/v1/comment_shows/${comment.id}`, options)
         .then(res => {
             let lessShow = this.state.featuredShow
             lessShow.comment_shows = this.state.featuredShow.comment_shows.filter(cs => cs.id !== comment.id)
