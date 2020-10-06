@@ -130,7 +130,7 @@ class AllSongs extends React.Component{
                 
                 <Form inline className='lilfilters'>
                     <Form.Label className="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
-                      <strong>Sort By:</strong>
+                      <span><strong>Sort By:</strong></span>
                     </Form.Label>
                     <Form.Control
                         as="select"

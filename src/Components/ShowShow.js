@@ -111,7 +111,7 @@ class ShowShow extends React.Component {
         }
         
         const options = {
-            apiKey: process.env.REACT_APP_GENIUS_KEY,
+            apiKey: 'SE4l1fZX72vFKyJFXZ2BmKSZ1ASZHJ3thfhh-F82B-cAOIMcrO4gO7QrWy63mnWP',
             title: clickedSong,
             artist: 'Grateful Dead',
             optimizeQuery: true
