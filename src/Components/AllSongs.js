@@ -150,6 +150,7 @@ class AllSongs extends React.Component{
                         aria-label="Search"
                         aria-describedby="basic-addon2"
                         name='searchTerm'
+                        width='80px'
                         // value={this.state.searchTerm}
                         onChange={this.changeHandler}
                         />

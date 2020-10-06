@@ -44,6 +44,7 @@ class SearchFilter extends React.Component{
                     <InputGroup  className='lilfilters'>
                         <FormControl
                         placeholder="Search by Venue, City or Year"
+                        width='80px'
                         aria-label="Search"
                         aria-describedby="basic-addon2"
                         name='searchTerm'
